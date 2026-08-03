@@ -148,6 +148,88 @@ body.terminal-body {
   box-shadow: 0 0 16px var(--c-amber-glow);
 }
 
+/* 手機版漢堡選單按鈕 (預設隱藏) */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--c-amber);
+  border-radius: 4px;
+  width: 40px;
+  height: 36px;
+  padding: 6px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-fast);
+}
+
+.mobile-menu-btn .bar {
+  width: 100%;
+  height: 2px;
+  background: var(--c-amber);
+  border-radius: 1px;
+  transition: var(--transition-fast);
+}
+
+.mobile-menu-btn:hover, .mobile-menu-btn.active {
+  box-shadow: 0 0 12px var(--c-amber-glow);
+}
+
+.mobile-menu-btn.active .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.mobile-menu-btn.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* 手機版下拉抽屜選單 (預設隱藏) */
+.mobile-menu-drawer {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(12, 12, 12, 0.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--c-amber);
+  padding: 20px 24px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 149, 0, 0.2);
+  transition: var(--transition-fast);
+  z-index: 99;
+}
+
+.mobile-menu-drawer.active {
+  display: flex;
+}
+
+.mobile-nav-link {
+  color: var(--c-text-main);
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--c-border-dot);
+  transition: var(--transition-fast);
+}
+
+.mobile-nav-link:hover {
+  color: var(--c-amber);
+  padding-left: 8px;
+}
+
+.mobile-btn-cta {
+  text-align: center;
+  margin-top: 8px;
+  padding: 10px;
+}
+
 /* Sections Base */
 .section { padding: 56px 0; border-bottom: 1px dashed var(--c-border-dot); }
 .section-header { margin-bottom: 36px; }
@@ -749,7 +831,7 @@ body.terminal-body {
 .footer-cta-sub { font-size: 0.95rem; color: var(--c-amber); margin-bottom: 36px; }
 
 .footer-contact-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 36px; }
-.c-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.c-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 16px; display: flex; flex-direction: column; gap: 4px; position: relative; border-radius: 4px; transition: var(--transition-fast); }
 .c-head { font-size: 0.72rem; color: var(--c-amber); }
 .c-link { color: var(--c-text-main); text-decoration: none; font-size: 0.92rem; font-weight: 700; word-break: break-all; }
 .c-link:hover { color: var(--c-amber); }
@@ -757,7 +839,7 @@ body.terminal-body {
 .footer-bottom-bar { border-top: 1px dashed var(--c-border-dot); padding-top: 20px; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--c-text-muted); flex-wrap: wrap; gap: 12px; }
 
 /* ==========================================================================
-   Responsive Mobile Media Queries (精雕手機版，100% 不破壞桌面版)
+   Responsive Mobile Media Queries (精雕手機版 + 漢堡選單)
    ========================================================================== */
 @media (max-width: 768px) {
   /* 1. Header & Nav */
@@ -765,9 +847,11 @@ body.terminal-body {
   .logo-matrix { font-size: 1.5rem; }
   .brand-name { font-size: 0.92rem; }
   .brand-company { font-size: 0.7rem; }
-  .nav-actions { gap: 10px; }
-  .btn-terminal-primary { padding: 4px 10px; font-size: 0.78rem; }
   
+  /* 隱藏桌面版 Actions，顯示手機版漢堡按鈕 */
+  .nav-actions { display: none; }
+  .mobile-menu-btn { display: flex; }
+
   /* 2. Hero Section */
   .hero-nothing-card { padding: 28px 16px; }
   .led-strip { width: 60px; }
@@ -784,7 +868,7 @@ body.terminal-body {
   .pain-matrix-terminal { grid-template-columns: 1fr; gap: 12px; }
   .nothing-banner-card { padding: 24px 16px; }
 
-  /* 4. 3D Orbit Mobile Stage (螢幕內不溢出) */
+  /* 4. 3D Orbit Mobile Stage */
   .orbit-stage { height: 380px; perspective: 800px; }
   .orbit-ring-floor { width: 340px; height: 340px; }
   .mini-card-3d {
@@ -817,7 +901,7 @@ body.terminal-body {
 }
 
 @media (max-width: 480px) {
-  .logo-text { display: none; } /* 極小螢幕隱藏公司全名，保留 [RF] Logo 與按鈕 */
+  .logo-text { display: none; }
   .nothing-capsule-grid { grid-template-columns: 1fr; }
   .orbit-stage { height: 340px; }
   .mini-card-3d {

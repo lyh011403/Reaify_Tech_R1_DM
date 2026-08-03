@@ -1,6 +1,35 @@
-// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (手機響應式優化版)
+// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (手機漢堡選單 Drawer)
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Reaify Tech Mobile-Responsive Engine 5.6 Initialized.');
+  console.log('Reaify Tech Mobile-Drawer Menu Engine Initialized.');
+
+  // ==========================================================================
+  // 0. 手機版漢堡選單 (Mobile Hamburger Menu Drawer) 切換邏輯
+  // ==========================================================================
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+
+  if (mobileMenuBtn && mobileMenuDrawer) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenuBtn.classList.toggle('active');
+      mobileMenuDrawer.classList.toggle('active');
+    });
+
+    const mobileNavLinks = mobileMenuDrawer.querySelectorAll('a');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuDrawer.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuDrawer.classList.remove('active');
+      }
+    });
+  }
 
   // ==========================================================================
   // 1. 轉灣與擺尾呼吸動態魚鱗閃光 Engine 5.6 (安詳慢速 + 轉彎/呼吸瞬間反光)
@@ -18,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let mouse = { x: width / 2, y: height / 2, vx: 0, vy: 0, active: false, lastX: width / 2, lastY: height / 2 };
     
-    // 支援 Touch 與 Mouse 雙重撒飼料與游標追蹤
     function updatePointerPos(clientX, clientY) {
       mouse.vx = clientX - mouse.lastX;
       mouse.vy = clientY - mouse.lastY;
@@ -73,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('pointerdown', (e) => {
-      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-btn')) return;
+      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-btn') || e.target.closest('#mobile-menu-btn') || e.target.closest('#mobile-menu-drawer')) return;
 
       for (let i = 0; i < 5; i++) {
         feedPellets.push(new FeedPellet(e.clientX, e.clientY));
@@ -122,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // ------------------------------------------------------------------------
-    // 轉彎與呼吸動態魚鱗閃光生態魚個體
+    // 轉灣與呼吸動態魚鱗閃光生態魚個體
     // ------------------------------------------------------------------------
     class DynamicFlashSardine {
       constructor(typeId) {
@@ -441,7 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const angleStep = 360 / count;
 
-    // 動態手機與桌面 3D 半徑視角控制
     const isSmallMobile = window.innerWidth <= 480;
     const isMobile = window.innerWidth <= 768;
 
