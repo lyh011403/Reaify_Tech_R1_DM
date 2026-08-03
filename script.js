@@ -1,6 +1,6 @@
-// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (手機漢堡選單 Drawer)
+// Reaify Tech - 3D 星軌 (手勢拖拽滑動+自動旋轉) + Lupi Basics + 魚鱗閃光 Sardine Engine 5.6
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Reaify Tech Mobile-Drawer Menu Engine Initialized.');
+  console.log('Reaify Tech Interactive Orbit Dragging Engine Initialized.');
 
   // ==========================================================================
   // 0. 手機版漢堡選單 (Mobile Hamburger Menu Drawer) 切換邏輯
@@ -64,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // ------------------------------------------------------------------------
-    // 飼料粒子系統 (Feed Pellets System)
-    // ------------------------------------------------------------------------
     const feedPellets = [];
     
     class FeedPellet {
@@ -101,16 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('pointerdown', (e) => {
-      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-btn') || e.target.closest('#mobile-menu-btn') || e.target.closest('#mobile-menu-drawer')) return;
+      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-btn') || e.target.closest('#mobile-menu-btn') || e.target.closest('#mobile-menu-drawer') || e.target.closest('.orbit-stage')) return;
 
       for (let i = 0; i < 5; i++) {
         feedPellets.push(new FeedPellet(e.clientX, e.clientY));
       }
     });
 
-    // ------------------------------------------------------------------------
-    // 基礎魚體點陣紋理 (5 層景深)
-    // ------------------------------------------------------------------------
     function createBaseTexture(scale, glowBlur, alpha) {
       const texCanvas = document.createElement('canvas');
       const texSize = Math.ceil(52 * scale);
@@ -124,17 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
       tCtx.shadowBlur = glowBlur;
       tCtx.shadowColor = `rgba(200, 100, 0, ${alpha * 0.5})`;
 
-      // 魚頭
       tCtx.fillStyle = `rgba(215, 125, 20, ${alpha})`;
       tCtx.fillRect(6, -1.5, 3, 3);
 
-      // 魚身暗底
       tCtx.fillStyle = `rgba(175, 80, 0, ${alpha * 0.9})`;
       tCtx.fillRect(2, -2, 4, 4);
       tCtx.fillRect(-2, -2, 4, 4);
       tCtx.fillRect(-6, -1.5, 4, 3);
 
-      // 魚尾
       tCtx.fillStyle = `rgba(180, 85, 0, ${alpha * 0.6})`;
       tCtx.fillRect(-9, -1, 3, 2);
 
@@ -149,9 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       createBaseTexture(1.25, 12, 1.00)
     ];
 
-    // ------------------------------------------------------------------------
-    // 轉灣與呼吸動態魚鱗閃光生態魚個體
-    // ------------------------------------------------------------------------
     class DynamicFlashSardine {
       constructor(typeId) {
         this.typeId = typeId;
@@ -369,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 2. 4 大核心功能模組 (SVG Icon & 3D 星軌舞台響應式)
+  // 2. 4 大核心功能模組 (3D 星軌舞台: 手勢拖拽滑動 + 慣性 + 自動旋轉)
   // ==========================================================================
   const modulesData = [
     {
@@ -443,10 +431,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let targetSpeed = 0.25;
   let hoveredIndex = null;
 
+  // 手動拖拽 & 慣性物理引擎
+  let isDragging = false;
+  let startX = 0;
+  let lastX = 0;
+  let dragVelocity = 0;
+  let dragDistance = 0;
+
   function renderOrbitCards() {
     if (!orbitContainer) return;
     orbitContainer.innerHTML = modulesData.map((item, index) => `
-      <div class="mini-card-3d nothing-card glyph-led-interactive" data-index="${index}" onclick="openModal(${index})">
+      <div class="mini-card-3d nothing-card glyph-led-interactive" data-index="${index}" onclick="handleCardClick(${index})">
         <div class="led-top-strip"></div>
         <div class="model-icon-badge-orbit">
           <div class="icon-svg-wrapper">${item.svgIcon}</div>
@@ -498,9 +493,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ------------------------------------------------------------------------
+  // 手拖拉滑動 + 慣性甩動 + 自動自轉 邏輯
+  // ------------------------------------------------------------------------
+  function handleDragStart(clientX) {
+    isDragging = true;
+    startX = clientX;
+    lastX = clientX;
+    dragVelocity = 0;
+    dragDistance = 0;
+    if (orbitStage) orbitStage.classList.add('is-dragging');
+  }
+
+  function handleDragMove(clientX) {
+    if (!isDragging) return;
+    const dx = clientX - lastX;
+    dragDistance += Math.abs(dx);
+    dragVelocity = dx * 0.42; // 移動加速度
+    orbitAngle = (orbitAngle + dragVelocity) % 360;
+    lastX = clientX;
+    updateOrbitPositions();
+  }
+
+  function handleDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    if (orbitStage) orbitStage.classList.remove('is-dragging');
+  }
+
+  if (orbitStage) {
+    // Mouse 拖拽
+    orbitStage.addEventListener('mousedown', (e) => handleDragStart(e.clientX));
+    window.addEventListener('mousemove', (e) => handleDragMove(e.clientX));
+    window.addEventListener('mouseup', handleDragEnd);
+
+    // Touch 觸控滑動 (手機)
+    orbitStage.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) handleDragStart(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) handleDragMove(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('touchend', handleDragEnd);
+  }
+
   function animateOrbit() {
-    autoRotateSpeed += (targetSpeed - autoRotateSpeed) * 0.1;
-    orbitAngle = (orbitAngle + autoRotateSpeed) % 360;
+    if (isDragging) {
+      // 手動拖拽操控中
+    } else if (Math.abs(dragVelocity) > 0.05) {
+      // 離手後的慣性甩動滑行 (Air Friction Damping)
+      orbitAngle = (orbitAngle + dragVelocity) % 360;
+      dragVelocity *= 0.94; // 空氣摩擦係數
+      autoRotateSpeed = dragVelocity;
+    } else {
+      // 慣性結束，平滑恢復預設自動旋轉 (0.25)
+      autoRotateSpeed += (targetSpeed - autoRotateSpeed) * 0.08;
+      orbitAngle = (orbitAngle + autoRotateSpeed) % 360;
+    }
+
     updateOrbitPositions();
     requestAnimationFrame(animateOrbit);
   }
@@ -509,25 +561,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = orbitContainer.querySelectorAll('.mini-card-3d');
     cards.forEach((card, index) => {
       card.addEventListener('mouseenter', () => {
-        hoveredIndex = index;
-        targetSpeed = 0;
+        if (!isDragging) {
+          hoveredIndex = index;
+          targetSpeed = 0;
+        }
       });
       card.addEventListener('mouseleave', () => {
         hoveredIndex = null;
-        if (!holoModal.classList.contains('active')) targetSpeed = 0.25;
+        if (!holoModal.classList.contains('active') && !isDragging) {
+          targetSpeed = 0.25;
+        }
       });
     });
   }
 
-  if (orbitStage) {
-    orbitStage.addEventListener('mouseenter', () => {
-      if (!holoModal.classList.contains('active')) targetSpeed = 0;
-    });
-    orbitStage.addEventListener('mouseleave', () => {
-      if (!holoModal.classList.contains('active')) targetSpeed = 0.25;
-      hoveredIndex = null;
-    });
-  }
+  // 區分拖曳滑動與點擊事件 (Drag vs Click)
+  window.handleCardClick = function(index) {
+    if (dragDistance > 10) return; // 若距離 > 10px 視為拖曳滑動，不開啟彈窗
+    openModal(index);
+  };
 
   window.openModal = function(index) {
     const item = modulesData[index];

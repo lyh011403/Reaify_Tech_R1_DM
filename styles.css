@@ -148,7 +148,7 @@ body.terminal-body {
   box-shadow: 0 0 16px var(--c-amber-glow);
 }
 
-/* 手機版漢堡選單按鈕 (預設隱藏) */
+/* 手機版漢堡選單按鈕 */
 .mobile-menu-btn {
   display: none;
   background: transparent;
@@ -188,7 +188,7 @@ body.terminal-body {
   transform: translateY(-10px) rotate(-45deg);
 }
 
-/* 手機版下拉抽屜選單 (預設隱藏) */
+/* 手機版下拉抽屜選單 */
 .mobile-menu-drawer {
   display: none;
   flex-direction: column;
@@ -369,7 +369,7 @@ body.terminal-body {
 .banner-quote { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--c-text-main); margin-bottom: 8px; }
 .banner-sub { font-size: 0.9rem; color: var(--c-amber); }
 
-/* 3D 迷你星軌舞台 (純粹琥珀 LED 呼吸燈模式) */
+/* 3D 迷你星軌舞台 (手勢拖拽滑動 + 自動旋轉) */
 .orbit-stage {
   position: relative;
   width: 100%;
@@ -380,6 +380,13 @@ body.terminal-body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.orbit-stage:active, .orbit-stage.is-dragging {
+  cursor: grabbing;
 }
 
 .orbit-ring-floor {
@@ -839,20 +846,17 @@ body.terminal-body {
 .footer-bottom-bar { border-top: 1px dashed var(--c-border-dot); padding-top: 20px; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--c-text-muted); flex-wrap: wrap; gap: 12px; }
 
 /* ==========================================================================
-   Responsive Mobile Media Queries (精雕手機版 + 漢堡選單)
+   Responsive Mobile Media Queries
    ========================================================================== */
 @media (max-width: 768px) {
-  /* 1. Header & Nav */
   .top-nav { padding: 10px 0; }
   .logo-matrix { font-size: 1.5rem; }
   .brand-name { font-size: 0.92rem; }
   .brand-company { font-size: 0.7rem; }
   
-  /* 隱藏桌面版 Actions，顯示手機版漢堡按鈕 */
   .nav-actions { display: none; }
   .mobile-menu-btn { display: flex; }
 
-  /* 2. Hero Section */
   .hero-nothing-card { padding: 28px 16px; }
   .led-strip { width: 60px; }
   .nothing-badge { font-size: 0.7rem; padding: 2px 8px; }
@@ -862,13 +866,11 @@ body.terminal-body {
   .nothing-capsule { padding: 10px 8px; }
   .capsule-label { font-size: 0.78rem; }
 
-  /* 3. Sections & Cards */
   .section { padding: 36px 0; }
   .nothing-card { padding: 20px 16px; }
   .pain-matrix-terminal { grid-template-columns: 1fr; gap: 12px; }
   .nothing-banner-card { padding: 24px 16px; }
 
-  /* 4. 3D Orbit Mobile Stage */
   .orbit-stage { height: 380px; perspective: 800px; }
   .orbit-ring-floor { width: 340px; height: 340px; }
   .mini-card-3d {
@@ -883,18 +885,15 @@ body.terminal-body {
   .feat-code-head { font-size: 0.82rem; }
   .feat-code-sub { font-size: 0.72rem; }
 
-  /* 5. Lupi Basics Charts Mobile */
   .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
   .db-day-lbl { width: 28px; font-size: 0.7rem; }
   .db-mult-tag { width: 48px; font-size: 0.7rem; }
   .f4-svg-donut { width: 160px; height: 160px; }
   .f4-big-num { font-size: 2.6rem; }
 
-  /* 6. Products Grid & Table */
   .products-terminal-grid { grid-template-columns: 1fr; gap: 14px; }
   .plan-code-name { font-size: 2rem; }
   
-  /* 7. Footer Mobile */
   .terminal-footer { padding: 36px 0 24px 0; }
   .footer-contact-matrix { grid-template-columns: 1fr; gap: 10px; }
   .footer-bottom-bar { flex-direction: column; text-align: center; gap: 8px; }
