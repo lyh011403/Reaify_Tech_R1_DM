@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 2. 4 大核心功能模組 (3D 星軌舞台: 手勢拖拽滑動 + 慣性 + 自動旋轉)
+  // 2. 4 大核心功能模組 (3D 星軌舞台: 天然直覺手勢拖拽 + 慣性 + 自動旋轉)
   // ==========================================================================
   const modulesData = [
     {
@@ -467,8 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const isSmallMobile = window.innerWidth <= 480;
     const isMobile = window.innerWidth <= 768;
 
-    const radiusX = isSmallMobile ? 125 : (isMobile ? 155 : 340);
-    const radiusZ = isSmallMobile ? 70 : (isMobile ? 95 : 180);
+    // 手機版拉大 X 與 Z 軸半徑，給予充足卡片間距
+    const radiusX = isSmallMobile ? 160 : (isMobile ? 190 : 340);
+    const radiusZ = isSmallMobile ? 95 : (isMobile ? 115 : 180);
 
     cards.forEach((card, index) => {
       const cardAngle = (orbitAngle + index * angleStep) % 360;
@@ -479,7 +480,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isHovered = (hoveredIndex === index);
       let posY = isHovered ? -25 : 0;
-      let scale = isHovered ? (isMobile ? 1.06 : 1.15) : (isMobile ? 0.88 : 0.95);
+      // 手機版非焦點卡片 scale 縮小至 0.72，前後視覺層次分明
+      let scale = isHovered ? (isMobile ? 1.05 : 1.15) : (isMobile ? 0.72 : 0.95);
 
       if (isHovered) card.classList.add('is-hovered');
       else card.classList.remove('is-hovered');
@@ -494,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ------------------------------------------------------------------------
-  // 手拖拉滑動 + 慣性甩動 + 自動自轉 邏輯
+  // 手拖拉滑動 + 慣性甩動 + 自然直覺手勢方向 (往左滑卡片向左走)
   // ------------------------------------------------------------------------
   function handleDragStart(clientX) {
     isDragging = true;
@@ -509,7 +511,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isDragging) return;
     const dx = clientX - lastX;
     dragDistance += Math.abs(dx);
-    dragVelocity = dx * 0.42; // 移動加速度
+    // 加上負號：手往左滑(dx<0)，dragVelocity>0，卡片向左轉動！
+    dragVelocity = -dx * 0.45;
     orbitAngle = (orbitAngle + dragVelocity) % 360;
     lastX = clientX;
     updateOrbitPositions();
