@@ -7,7 +7,7 @@
 :root {
   /* Color Tokens */
   --c-black: #080808;
-  --c-card-bg: #0D0D0D;
+  --c-card-bg: #121212;
   --c-subtle-bg: #1A1A1A;
   
   --c-amber: #FF9500;
@@ -15,6 +15,10 @@
   --c-amber-glow: rgba(255, 149, 0, 0.7);
   --c-green: #10B981;
   --c-red: #EF4444;
+
+  --c-text-main: #FFFFFF;
+  --c-text-muted: #A3A3A3;
+  --c-border-dot: rgba(255, 255, 255, 0.15);
 
   /* Fonts */
   --font-dot: 'VT323', monospace;
@@ -40,7 +44,7 @@ html {
 
 body.terminal-body {
   background-color: var(--c-black);
-  color: var(--c-text-main);
+  color: #FFFFFF;
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -119,7 +123,7 @@ body.terminal-body {
 .brand-logo { display: flex; align-items: center; gap: 12px; }
 .logo-matrix { font-family: var(--font-dot); font-size: 1.9rem; color: var(--c-amber); font-weight: 900; line-height: 1; }
 .logo-text { display: flex; flex-direction: column; }
-.brand-name { font-size: 1.05rem; font-weight: 700; color: var(--c-text-main); letter-spacing: 0.04em; line-height: 1.2; }
+.brand-name { font-size: 1.05rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.04em; line-height: 1.2; }
 .brand-company { font-size: 0.78rem; color: var(--c-text-muted); letter-spacing: 0.05em; font-weight: 500; line-height: 1.2; }
 
 .nav-actions { display: flex; align-items: center; gap: 20px; }
@@ -144,7 +148,7 @@ body.terminal-body {
   box-shadow: 0 0 16px var(--c-amber-glow);
 }
 
-/* 超顯眼高亮 Nothing Amber LED 漢堡按鈕 */
+/* 超顯眼高亮 Nothing Amber LED 漢堡按鈕 (Mobile Only) */
 .mobile-menu-btn {
   display: none;
   background: #000000;
@@ -214,7 +218,7 @@ body.terminal-body {
 }
 
 .mobile-nav-link {
-  color: var(--c-text-main);
+  color: #FFFFFF;
   text-decoration: none;
   font-size: 1.05rem;
   padding: 10px 0;
@@ -239,7 +243,7 @@ body.terminal-body {
 .text-center { text-align: center; }
 
 .ascii-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--c-amber); margin-bottom: 6px; letter-spacing: 0.1em; }
-.section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: var(--c-text-main); letter-spacing: 0.02em; margin-bottom: 6px; }
+.section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: #FFFFFF; letter-spacing: 0.02em; margin-bottom: 6px; }
 .section-desc { font-size: 0.9rem; color: var(--c-text-muted); }
 
 .font-dot { font-family: var(--font-dot); letter-spacing: 0.05em; }
@@ -352,13 +356,13 @@ body.terminal-body {
 
 .dot-red { color: var(--c-red); }
 
-.hero-title { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; color: var(--c-text-main); margin-bottom: 8px; }
+.hero-title { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; color: #FFFFFF !important; margin-bottom: 8px; }
 .hero-tagline { font-size: 1.1rem; color: var(--c-amber); margin-bottom: 36px; }
 
 .nothing-capsule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; max-width: 860px; margin: 0 auto; }
 .nothing-capsule { background: #000000; border: 1px solid var(--c-border-dot); padding: 12px 16px; border-radius: 2px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition-fast); }
 .capsule-icon { font-size: 1.2rem; color: var(--c-amber); }
-.capsule-label { font-size: 0.88rem; color: var(--c-text-main); }
+.capsule-label { font-size: 0.88rem; color: #FFFFFF; }
 
 /* Pain Points Terminal Matrix */
 .pain-matrix-terminal { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px; }
@@ -369,7 +373,7 @@ body.terminal-body {
 .nothing-banner-card { background: #000000; border: 1px solid var(--c-border-dot); border-radius: 4px; padding: 36px 32px; text-align: center; transition: var(--transition-fast); }
 .nothing-banner-card:hover { border-color: var(--c-amber); box-shadow: 0 0 28px var(--c-amber-glow); }
 .banner-terminal-header { font-size: 0.75rem; color: var(--c-text-muted); margin-bottom: 12px; }
-.banner-quote { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--c-text-main); margin-bottom: 8px; }
+.banner-quote { font-size: clamp(1.6rem, 4vw, 2.4rem); color: #FFFFFF !important; margin-bottom: 8px; }
 .banner-sub { font-size: 0.9rem; color: var(--c-amber); }
 
 /* 3D 迷你星軌舞台 (純黑不透明背景，擋光防止字透) */
@@ -443,7 +447,7 @@ body.terminal-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #0D0D0D !important; /* 不透明純黑背景，防字重疊透出 */
+  background: #0D0D0D !important;
   border: 1px solid rgba(255, 149, 0, 0.3);
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
@@ -493,7 +497,7 @@ body.terminal-body {
 .feat-code-head {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--c-text-main);
+  color: #FFFFFF;
   margin-bottom: 4px;
 }
 
@@ -658,7 +662,7 @@ body.terminal-body {
 
 .wf-unit { background: #000000; border: 1px solid var(--c-border-dot); padding: 16px 10px; border-radius: 2px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: var(--transition-fast); }
 .wf-step-num { font-size: 1.4rem; color: var(--c-amber); font-weight: 900; }
-.wf-title { font-size: 1.1rem; color: var(--c-text-main); }
+.wf-title { font-size: 1.1rem; color: #FFFFFF; }
 .wf-desc { font-size: 0.72rem; color: var(--c-text-muted); }
 
 /* ==========================================================================
@@ -836,7 +840,7 @@ body.terminal-body {
 .plan-term-card { padding: 28px; }
 
 .plan-tag { font-size: 0.75rem; color: var(--c-text-muted); margin-bottom: 6px; }
-.plan-code-name { font-size: 2.5rem; font-weight: 900; color: var(--c-text-main); margin-bottom: 2px; }
+.plan-code-name { font-size: 2.5rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px; }
 .plan-code-fit { font-size: 0.85rem; color: var(--c-text-muted); margin-bottom: 20px; }
 
 .plan-specs-list { display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem; margin-bottom: 24px; }
@@ -848,7 +852,7 @@ body.terminal-body {
 .bloomberg-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 500px; font-size: 0.85rem; }
 .bloomberg-table th, .bloomberg-table td { padding: 14px 18px; border-bottom: 1px dashed var(--c-border-dot); }
 .bloomberg-table th { background: #000000; color: var(--c-amber); }
-.m-head { color: var(--c-text-main); font-weight: 700; }
+.m-head { color: #FFFFFF; font-weight: 700; }
 
 /* Applications Grid */
 .app-terminal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
@@ -857,19 +861,19 @@ body.terminal-body {
 /* Footer Terminal */
 .terminal-footer { background: #000000; border-top: 1px solid var(--c-border-dot); padding: 56px 0 32px 0; margin-top: 48px; position: relative; z-index: 10; }
 .footer-nothing-box { background: transparent; border: none; padding: 0; }
-.footer-cta-title { font-size: clamp(2rem, 5vw, 3rem); color: var(--c-text-main); margin-bottom: 8px; }
+.footer-cta-title { font-size: clamp(2rem, 5vw, 3rem); color: #FFFFFF; margin-bottom: 8px; }
 .footer-cta-sub { font-size: 0.95rem; color: var(--c-amber); margin-bottom: 36px; }
 
 .footer-contact-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 36px; }
 .c-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 16px; display: flex; flex-direction: column; gap: 4px; position: relative; border-radius: 4px; transition: var(--transition-fast); }
 .c-head { font-size: 0.72rem; color: var(--c-amber); }
-.c-link { color: var(--c-text-main); text-decoration: none; font-size: 0.92rem; font-weight: 700; word-break: break-all; }
+.c-link { color: #FFFFFF; text-decoration: none; font-size: 0.92rem; font-weight: 700; word-break: break-all; }
 .c-link:hover { color: var(--c-amber); }
 
 .footer-bottom-bar { border-top: 1px dashed var(--c-border-dot); padding-top: 20px; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--c-text-muted); flex-wrap: wrap; gap: 12px; }
 
 /* ==========================================================================
-   Responsive Mobile Media Queries (手機版卡片與字體精雕排版)
+   Responsive Mobile Media Queries
    ========================================================================== */
 @media (max-width: 768px) {
   .top-nav { padding: 10px 0; }
@@ -894,7 +898,6 @@ body.terminal-body {
   .pain-matrix-terminal { grid-template-columns: 1fr; gap: 12px; }
   .nothing-banner-card { padding: 24px 16px; }
 
-  /* 3D 星軌舞台手機版優化 (寬鬆軌道 + 精緻字體) */
   .features-section .section-header { margin-bottom: 18px; }
   .orbit-stage { height: 350px; perspective: 800px; margin: 0.5rem 0 1.5rem 0; }
   .orbit-ring-floor { width: 380px; height: 380px; }
