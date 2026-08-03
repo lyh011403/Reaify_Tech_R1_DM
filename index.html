@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reaify Tech 睿非科技 - AI 智慧桌遊裁判系統</title>
+  <meta name="description" content="睿非科技股份有限公司 (Reaify Tech) - AI 智慧桌遊裁判系統。結合 AI 視覺、手部自動追蹤辨識與 NFC 技術，為桌遊店家打造高效自動化的智慧管理與遊戲體驗。">
+  
+  <!-- Google Fonts: VT323 (Dot Matrix), Space Mono, Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="terminal-body">
+
+  <!-- 全螢幕背景 Nothing LED 馬賽克沙丁魚群 Canvas 特效 -->
+  <canvas id="sardine-canvas"></canvas>
+
+  <!-- 頂部即時動態資訊列 (大白話版) -->
+  <div class="bloomberg-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-item"><span class="t-green">● 系統狀態：正常連線</span></span>
+      <span class="ticker-item">Reaify OS v2.4</span>
+      <span class="ticker-item"><span class="t-amber">AI 回應速度：0.08 秒</span></span>
+      <span class="ticker-item"><span class="t-amber">視覺辨識：60 幀/秒</span></span>
+      <span class="ticker-item"><span class="t-red">人事成本節算：節省 68%</span></span>
+      <span class="ticker-item">手部自動追蹤：運作中</span>
+      <span class="ticker-item">睿非科技股份有限公司</span>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="container nav-content">
+      <div class="brand-logo">
+        <span class="logo-matrix">[RF]</span>
+        <div class="logo-text">
+          <span class="brand-name font-mono">Reaify Tech</span>
+          <span class="brand-company font-sans">睿非科技股份有限公司</span>
+        </div>
+      </div>
+      <div class="nav-actions font-mono">
+        <a href="#pain-points" class="nav-link">&gt; 店家痛點</a>
+        <a href="#features" class="nav-link">&gt; 核心模組</a>
+        <a href="#dashboard" class="nav-link">&gt; 營運數據</a>
+        <a href="#products" class="nav-link">&gt; 產品方案</a>
+        <a href="#contact" class="btn-terminal-primary">&gt; 專人諮詢</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- ① Hero Cover (介紹自己) -->
+    <section id="hero" class="section hero-section">
+      <div class="container">
+        
+        <div class="nothing-card hero-nothing-card glyph-led-interactive tilt-card">
+          <div class="glyph-neon-bar-header">
+            <div class="led-strip s-left"></div>
+            <div class="led-center-dot"></div>
+            <div class="led-strip s-right"></div>
+          </div>
+
+          <div class="nothing-badge">
+            <span class="dot-red">●</span> 睿非科技 // AI 智慧桌遊裁判系統
+          </div>
+
+          <h1 class="hero-title font-dot glyph-neon-text">AI 智慧桌遊裁判系統</h1>
+          <p class="hero-tagline font-mono">&gt; 讓 AI 成為你的桌遊主持人 _</p>
+
+          <!-- 4 個 LED 點亮膠囊標籤 -->
+          <div class="nothing-capsule-grid">
+            <div class="nothing-capsule glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="capsule-icon font-dot">[AI]</span>
+              <span class="capsule-label font-mono">AI 語音主持</span>
+            </div>
+            <div class="nothing-capsule glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="capsule-icon font-dot">[HT]</span>
+              <span class="capsule-label font-mono">手部追蹤辨識</span>
+            </div>
+            <div class="nothing-capsule glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="capsule-icon font-dot">[NFC]</span>
+              <span class="capsule-label font-mono">NFC 快速感應</span>
+            </div>
+            <div class="nothing-capsule glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="capsule-icon font-dot">[CLOUD]</span>
+              <span class="capsule-label font-mono">雲端店家管理</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ② 市場痛點與使命宣告 (問題放在最前線) -->
+    <section id="pain-points" class="section pain-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[WHY_REAIFY_TECH]</div>
+          <h2 class="section-title font-dot">桌遊店每天都在面臨的問題</h2>
+          <p class="section-desc font-mono">桌遊店家常見的營運瓶頸與痛點分析</p>
+        </div>
+
+        <div class="pain-matrix-terminal">
+          <div class="nothing-card pain-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="term-head font-mono">[問題 01] 無人帶遊戲</div>
+            <p class="term-body font-mono">現場客滿與熱門時段人力有限，無法即時為每桌講解複雜規則與主持遊戲。</p>
+          </div>
+
+          <div class="nothing-card pain-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="term-head font-mono">[問題 02] 人事成本增加</div>
+            <p class="term-body font-mono">工資上漲與全時段工讀安排，大幅壓迫店家經營利潤空間與現金流。</p>
+          </div>
+
+          <div class="nothing-card pain-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="term-head font-mono">[問題 03] 新人培訓耗時</div>
+            <p class="term-body font-mono">店內數百款桌遊規則繁雜，新進員工訓練週期長且帶桌服務品質難一致。</p>
+          </div>
+
+          <div class="nothing-card pain-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="term-head font-mono">[問題 04] 無法快速開桌</div>
+            <p class="term-body font-mono">玩家卡在研讀說明書與等待教遊戲，降低遊戲體驗與桌面週轉效率。</p>
+          </div>
+        </div>
+
+        <!-- Banner -->
+        <div class="nothing-banner-card glyph-led-interactive tilt-card">
+          <div class="led-top-strip"></div>
+          <div class="banner-terminal-header font-mono">
+            <span>睿非科技 // 核心使命</span>
+          </div>
+          <h3 class="banner-quote font-dot">“ Reaify Tech 讓 AI 接手重複性的工作 ”</h3>
+          <p class="banner-sub font-mono">&gt; 讓店員專注於高品質的親切服務與專屬氛圍營造 _</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ③ 四大核心功能模組 (純粹琥珀 LED 呼吸燈模式) -->
+    <section id="features" class="section features-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[SYSTEM_MODULES]</div>
+          <h2 class="section-title font-dot">四大核心功能模組</h2>
+          <p class="section-desc font-mono">&gt; 滑鼠移入自動暫停 // 點擊了解模組細節 _</p>
+        </div>
+
+        <!-- 3D 迷你星軌舞台 (純粹柔和琥珀 LED 呼吸燈) -->
+        <div class="orbit-stage" id="orbit-stage">
+          <div class="orbit-ring-floor"></div>
+          <div class="orbit-container" id="orbit-container">
+            <!-- 由 JavaScript 動態生成 4 大卡片 -->
+          </div>
+        </div>
+
+        <!-- 控制自轉按鈕列 -->
+        <div class="deck-controller font-mono text-center">
+          <button class="ctrl-btn" id="toggle-spin-btn">⏸ 暫停旋轉</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ④ 7 步驟體驗流程 -->
+    <section id="solution" class="section solution-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[WORKFLOW]</div>
+          <h2 class="section-title font-dot">直觀流暢的 7 步驟遊戲體驗流程</h2>
+          <p class="section-desc font-mono">玩家遊玩體驗與 AI 裁判服務流程</p>
+        </div>
+
+        <div class="nothing-card workflow-card glyph-led-interactive tilt-card">
+          <div class="led-top-strip"></div>
+          <div class="workflow-grid-matrix">
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">01</span>
+              <span class="wf-title font-dot">玩家入座</span>
+              <span class="wf-desc font-mono">掃碼/NFC登入</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">02</span>
+              <span class="wf-title font-dot">放置桌遊</span>
+              <span class="wf-desc font-mono">配件置於辨識區</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">03</span>
+              <span class="wf-title font-dot">AI辨識</span>
+              <span class="wf-desc font-mono">鏡頭毫秒識別</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">04</span>
+              <span class="wf-title font-dot">AI主持</span>
+              <span class="wf-desc font-mono">語音與規則指引</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">05</span>
+              <span class="wf-title font-dot">手部追蹤/NFC</span>
+              <span class="wf-desc font-mono">自動追蹤手部動作</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">06</span>
+              <span class="wf-title font-dot">自動記錄</span>
+              <span class="wf-desc font-mono">勝負與戰績累計</span>
+            </div>
+            <div class="wf-unit glyph-led-interactive">
+              <div class="led-indicator-dot"></div>
+              <span class="wf-step-num font-dot">07</span>
+              <span class="wf-title font-dot">營運分析</span>
+              <span class="wf-desc font-mono">店家遊玩數據圖表</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ⑤ Efferd Dashboard 大白話版本 -->
+    <section id="dashboard" class="section dashboard-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[BUSINESS_ANALYTICS]</div>
+          <h2 class="section-title font-dot">店家人力成本與開桌率營運動態圖表</h2>
+          <p class="section-desc font-mono">&gt; 店家人力成本節減與翻桌率效益分析 _</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- 圖表 1: 人力成本節減 -->
+          <div class="nothing-card dash-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="dash-card-head font-mono">
+              <span class="t-amber">&gt; 人力成本節減效益</span>
+              <div class="glance-switcher">
+                <button class="glance-btn active" onclick="switchF4Data('month', this)">單月</button>
+                <button class="glance-btn" onclick="switchF4Data('quarter', this)">單季</button>
+                <button class="glance-btn" onclick="switchF4Data('year', this)">年度</button>
+              </div>
+            </div>
+            
+            <div class="tick-donut-container">
+              <svg class="f4-svg-donut" viewBox="-10 -10 180 180" id="f4-svg-donut">
+                <!-- 由 JS 動態生成刻度線 -->
+              </svg>
+
+              <div class="f4-center-overlay font-mono">
+                <span id="f4-big-num" class="f4-big-num font-dot">68%</span>
+                <span id="f4-sub-lbl" class="f4-sub-lbl">平均人事開支節減</span>
+              </div>
+            </div>
+
+            <div class="dash-card-foot font-mono">
+              <div class="foot-metric">
+                <span class="lbl">傳統手動帶桌開銷:</span>
+                <span class="val t-red">100% 傳統全額薪資負擔</span>
+              </div>
+              <div class="foot-metric">
+                <span class="lbl">Reaify AI 節省效益:</span>
+                <span class="val t-green" id="f4-ai-saved-val">68% 人力成本已自動化節省</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 圖表 2: 翻桌率對比 -->
+          <div class="nothing-card dash-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="dash-card-head font-mono">
+              <span class="t-amber">&gt; 店家桌面翻桌率提升對比</span>
+              <div class="glance-switcher">
+                <button class="glance-btn active" onclick="switchF12Data('weekday', this)">平日</button>
+                <button class="glance-btn" onclick="switchF12Data('weekend', this)">週末</button>
+                <button class="glance-btn" onclick="switchF12Data('month', this)">全月</button>
+              </div>
+            </div>
+
+            <div class="dumbbell-chart-wrapper font-mono">
+              <div class="dumbbell-row">
+                <span class="db-day-lbl">週一</span>
+                <div class="db-track-container">
+                  <div class="db-hairline-rail"></div>
+                  <div class="db-connector-line" id="db-line-0" style="left: 20%; width: 45%;"></div>
+                  <div class="db-bead db-bead-left" id="db-bead-l-0" style="left: 20%;"></div>
+                  <div class="db-bead db-bead-right" id="db-bead-r-0" style="left: 65%;"></div>
+                </div>
+                <span class="db-mult-tag t-amber" id="db-tag-0">2.4 倍</span>
+              </div>
+
+              <div class="dumbbell-row">
+                <span class="db-day-lbl">週三</span>
+                <div class="db-track-container">
+                  <div class="db-hairline-rail"></div>
+                  <div class="db-connector-line" id="db-line-1" style="left: 22%; width: 48%;"></div>
+                  <div class="db-bead db-bead-left" id="db-bead-l-1" style="left: 22%;"></div>
+                  <div class="db-bead db-bead-right" id="db-bead-r-1" style="left: 70%;"></div>
+                </div>
+                <span class="db-mult-tag t-amber" id="db-tag-1">2.6 倍</span>
+              </div>
+
+              <div class="dumbbell-row">
+                <span class="db-day-lbl">週五</span>
+                <div class="db-track-container">
+                  <div class="db-hairline-rail"></div>
+                  <div class="db-connector-line" id="db-line-2" style="left: 25%; width: 52%;"></div>
+                  <div class="db-bead db-bead-left" id="db-bead-l-2" style="left: 25%;"></div>
+                  <div class="db-bead db-bead-right" id="db-bead-r-2" style="left: 77%;"></div>
+                </div>
+                <span class="db-mult-tag t-amber" id="db-tag-2">2.8 倍</span>
+              </div>
+
+              <div class="dumbbell-row">
+                <span class="db-day-lbl">週六</span>
+                <div class="db-track-container">
+                  <div class="db-hairline-rail"></div>
+                  <div class="db-connector-line" id="db-line-3" style="left: 28%; width: 57%;"></div>
+                  <div class="db-bead db-bead-left" id="db-bead-l-3" style="left: 28%;"></div>
+                  <div class="db-bead db-bead-right" id="db-bead-r-3" style="left: 85%;"></div>
+                </div>
+                <span class="db-mult-tag t-amber" id="db-tag-3">3.1 倍</span>
+              </div>
+
+              <div class="dumbbell-row">
+                <span class="db-day-lbl">週日</span>
+                <div class="db-track-container">
+                  <div class="db-hairline-rail"></div>
+                  <div class="db-connector-line" id="db-line-4" style="left: 26%; width: 54%;"></div>
+                  <div class="db-bead db-bead-left" id="db-bead-l-4" style="left: 26%;"></div>
+                  <div class="db-bead db-bead-right" id="db-bead-r-4" style="left: 80%;"></div>
+                </div>
+                <span class="db-mult-tag t-amber" id="db-tag-4">2.9 倍</span>
+              </div>
+            </div>
+
+            <div class="bar-legend font-mono">
+              <span class="legend-item"><span class="box-before"></span> 傳統人工帶桌</span>
+              <span class="legend-item"><span class="box-after"></span> Reaify AI 智慧帶桌 (<span id="f12-summary-tag" class="t-amber">翻桌率提升 2.4 ~ 3.1 倍</span>)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ⑥ 產品方案與比較 -->
+    <section id="products" class="section product-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[PRICING_PLANS]</div>
+          <h2 class="section-title font-dot">產品方案與效能比較</h2>
+          <p class="section-desc font-mono">彈性方案選擇與規格比較</p>
+        </div>
+
+        <div class="products-terminal-grid">
+          <div class="nothing-card plan-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="plan-tag font-mono">[方案 01] 標準版</div>
+            <h3 class="plan-code-name font-dot">R1</h3>
+            <p class="plan-code-fit font-mono">適合：小型店家 / 一般桌遊</p>
+
+            <div class="plan-specs-list font-mono">
+              <div class="p-row"><span>AI:</span> <span>Cloud AI 雲端推論</span></div>
+              <div class="p-row"><span>Vision:</span> <span>標準視覺辨識</span></div>
+              <div class="p-row"><span>NFC:</span> <span>單點感應模組</span></div>
+              <div class="p-row"><span>System:</span> <span>Cloud 雲端同步</span></div>
+            </div>
+
+            <div class="plan-foot-price font-mono">
+              <span>方案費用:</span>
+              <span class="price-val">請洽專人評估 / 彈性租賃</span>
+            </div>
+          </div>
+
+          <div class="nothing-card plan-term-card glyph-led-interactive tilt-card">
+            <div class="led-top-strip"></div>
+            <div class="plan-tag font-mono t-amber">[方案 02] 旗艦版 ★</div>
+            <h3 class="plan-code-name font-dot t-amber">R1 Pro</h3>
+            <p class="plan-code-fit font-mono">適合：大型店家 / 高互動桌遊</p>
+
+            <div class="plan-specs-list font-mono">
+              <div class="p-row"><span>AI:</span> <span>Edge AI 邊緣晶片</span></div>
+              <div class="p-row"><span>Vision:</span> <span>手部追蹤與 60FPS</span></div>
+              <div class="p-row"><span>NFC:</span> <span>多重道具感應</span></div>
+              <div class="p-row"><span>System:</span> <span>Edge 邊緣極速</span></div>
+            </div>
+
+            <div class="plan-foot-price font-mono">
+              <span>方案費用:</span>
+              <span class="price-val t-amber">專案旗艦規劃 / 定制服務</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 效能表格 -->
+        <div class="nothing-card table-nothing-card glyph-led-interactive tilt-card" style="margin-top: 24px;">
+          <div class="led-top-strip"></div>
+          <table class="bloomberg-table font-mono">
+            <thead>
+              <tr>
+                <th>[比較項目]</th>
+                <th>[R1 標準版]</th>
+                <th>[R1 PRO 旗艦版]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="m-head">AI 回應速度</td>
+                <td>雲端響應 ( ~0.8 秒 )</td>
+                <td class="t-amber">毫秒極速 ( &lt; 0.1 秒 )</td>
+              </tr>
+              <tr>
+                <td class="m-head">手部追蹤辨識</td>
+                <td>30 幀/秒 穩定辨識</td>
+                <td class="t-amber">60 幀/秒 極速自動追蹤</td>
+              </tr>
+              <tr>
+                <td class="metric-head">運算架構</td>
+                <td>Cloud 雲端推論</td>
+                <td class="t-amber">Edge 邊緣晶片硬體加速</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ⑦ 適用場域 -->
+    <section id="applications" class="section app-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="ascii-tag">[SCENARIOS]</div>
+          <h2 class="section-title font-dot">適用多元場域</h2>
+          <p class="section-desc font-mono">廣泛應用於各類桌遊與娛樂休閒空間</p>
+        </div>
+
+        <div class="app-terminal-grid">
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[01] 桌遊專賣店</div>
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[02] 桌遊主題咖啡廳</div>
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[03] 展覽與快閃活動</div>
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[04] 大專院校社團</div>
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[05] 教育培訓單位</div>
+          <div class="nothing-card app-term-box font-mono glyph-led-interactive tilt-card">[06] 親子娛樂空間</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 點擊卡片彈出的 3D 全息大螢幕 Modal -->
+  <div class="holo-modal-overlay" id="holo-modal">
+    <div class="holo-card-container" id="holo-card-container">
+      <button class="close-holo-btn" id="close-holo-btn">&times;</button>
+      <div class="holo-card-inner" id="holo-card-inner">
+        <div class="holo-front nothing-card card-amber-border">
+          <div class="modal-head-bar font-mono">
+            <span class="t-amber" id="modal-mod-tag">[模組 01]</span>
+            <span id="modal-version">v2.4 READY</span>
+          </div>
+
+          <h3 id="modal-title" class="font-dot modal-title-text"></h3>
+          <p id="modal-sub" class="font-mono modal-sub-text"></p>
+
+          <!-- SVG Icon 展示盒 -->
+          <div class="modal-hero-icon-box">
+            <div class="modal-svg-container" id="modal-icon-box"></div>
+            <div class="modal-icon-overlay font-mono">&gt; 睿非科技 AI 核心功能模組</div>
+          </div>
+
+          <!-- 詳細大白話解說區塊 -->
+          <div class="modal-explain-box font-mono" id="modal-explain-content">
+            <!-- JS 動態注入白話說明 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer CTA -->
+  <footer id="contact" class="terminal-footer">
+    <div class="container">
+      
+      <div class="nothing-card footer-nothing-box glyph-led-interactive">
+        <h2 class="footer-cta-title font-dot">準備好升級您的智慧桌遊體驗了嗎？</h2>
+        <p class="footer-cta-sub font-mono">&gt; 讓 Reaify Tech 成為您邁向自動化管理的最強後盾 _</p>
+
+        <div class="footer-contact-matrix font-mono">
+          <div class="c-box">
+            <span class="c-head">[電子信箱]</span>
+            <a href="mailto:contact@reaifytech.com" class="c-link">contact@reaifytech.com</a>
+          </div>
+          <div class="c-box">
+            <span class="c-head">[官方網站]</span>
+            <a href="https://www.reaifytech.com" target="_blank" class="c-link">www.reaifytech.com</a>
+          </div>
+          <div class="c-box">
+            <span class="c-head">[公司地點]</span>
+            <span class="c-link">台北市, 台灣</span>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar font-mono">
+          <span>[RF] Reaify Tech 睿非科技股份有限公司</span>
+          <span>© 2026 睿非科技股份有限公司 版權所有 All Rights Reserved.</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Reaify Tech 睿非科技 - AI 智慧桌遊裁判系統 (PDF DM)</title>
+  
+  <!-- Google Fonts: VT323 (Dot Matrix), Space Mono, Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    
+    :root {
+      --c-black: #080808;
+      --c-card-bg: #121212;
+      --c-amber: #FF9500;
+      --c-green: #10B981;
+      --c-red: #EF4444;
+      --c-text-main: #FFFFFF;
+      --c-text-muted: #A3A3A3;
+      --c-border-dot: rgba(255, 255, 255, 0.18);
+      
+      --font-dot: 'VT323', monospace;
+      --font-mono: 'Space Mono', monospace;
+      --font-sans: 'Noto Sans TC', sans-serif;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      background-color: var(--c-black);
+      color: var(--c-text-main);
+      font-family: var(--font-sans);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .poster-canvas {
+      width: 100%;
+      height: 100%;
+      padding: 12mm 14mm 12mm 14mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed var(--c-border-dot);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    
+    .brand-logo { display: flex; align-items: center; gap: 10px; }
+    .logo-matrix { font-family: var(--font-dot); font-size: 1.8pt; color: var(--c-amber); font-weight: 900; line-height: 1; }
+    .logo-text { display: flex; flex-direction: column; }
+    .brand-title { font-family: var(--font-mono); font-weight: 700; font-size: 11pt; color: var(--c-text-main); line-height: 1.1; }
+    .brand-company { font-family: var(--font-sans); font-size: 7.5pt; color: var(--c-text-muted); line-height: 1.1; }
+    .header-meta { font-family: var(--font-mono); font-size: 7pt; color: var(--c-amber); font-weight: 700; }
+
+    /* Hero Cover */
+    .hero-banner {
+      background: var(--c-card-bg);
+      border: 1px solid var(--c-border-dot);
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hero-title { font-family: var(--font-dot); font-size: 20pt; font-weight: 900; color: var(--c-text-main); line-height: 1.1; margin-bottom: 2px; }
+    .hero-tagline { font-family: var(--font-mono); font-size: 9.5pt; color: var(--c-amber); }
+    .keywords-pills { display: flex; gap: 5px; }
+    .kw-pill { background: #000000; border: 1px solid var(--c-border-dot); color: var(--c-text-main); padding: 4px 8px; border-radius: 3px; font-size: 7.5pt; font-family: var(--font-mono); }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex-grow: 1;
+      margin-bottom: 10px;
+    }
+
+    .col { display: flex; flex-direction: column; gap: 10px; justify-content: space-between; }
+    .card-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); border-radius: 4px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+    .box-title { font-family: var(--font-dot); font-size: 11pt; font-weight: 700; color: var(--c-amber); margin-bottom: 6px; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 3px; }
+
+    /* Pain Points */
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 6px; }
+    .pain-item { background: #000000; border: 1px solid var(--c-border-dot); padding: 5px 7px; border-radius: 3px; }
+    .pain-item-title { font-family: var(--font-mono); font-weight: 700; font-size: 7.5pt; color: var(--c-amber); margin-bottom: 1px; }
+    .pain-item-desc { font-size: 6.5pt; color: var(--c-text-muted); line-height: 1.25; }
+
+    .banner-quote { background: #000000; border: 1px solid var(--c-amber); color: var(--c-text-main); padding: 6px 8px; border-radius: 3px; font-family: var(--font-dot); font-size: 9pt; font-weight: 700; text-align: center; }
+
+    /* Features Section */
+    .feature-grid-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .feat-item { background: #000000; padding: 6px 8px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
+    .feat-name { font-family: var(--font-mono); font-weight: 700; font-size: 7.8pt; color: var(--c-text-main); margin-bottom: 1px; }
+    .feat-tags { font-family: var(--font-mono); font-size: 6.2pt; color: var(--c-text-muted); line-height: 1.3; }
+
+    /* Efferd Gauges in PDF */
+    .gauge-pdf-box { display: flex; items-center: center; justify-content: space-between; background: #000000; padding: 6px 10px; border: 1px solid var(--c-border-dot); }
+    .gauge-val-big { font-family: var(--font-dot); font-size: 20pt; font-weight: 900; color: var(--c-amber); }
+    .gauge-lbl-sm { font-family: var(--font-mono); font-size: 7pt; color: var(--c-text-muted); }
+
+    /* Solution Process */
+    .proc-flow { display: flex; flex-direction: column; gap: 4px; }
+    .proc-step { display: flex; align-items: center; gap: 6px; background: #000000; padding: 4px 7px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
+    .proc-num { font-family: var(--font-dot); font-weight: 700; font-size: 8pt; color: var(--c-amber); width: 20px; }
+    .proc-name { font-family: var(--font-dot); font-weight: 700; font-size: 8pt; width: 80px; color: var(--c-text-main); }
+    .proc-desc { font-family: var(--font-mono); font-size: 6.5pt; color: var(--c-text-muted); }
+
+    /* Product Plans */
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .plan-box { border: 1px solid var(--c-border-dot); border-radius: 3px; padding: 6px 8px; background: #000000; }
+    .plan-head { font-family: var(--font-dot); font-size: 10.5pt; font-weight: 900; color: var(--c-text-main); }
+    .plan-for { font-family: var(--font-mono); font-size: 6.4pt; color: var(--c-text-muted); margin-bottom: 3px; }
+    .plan-specs { font-family: var(--font-mono); font-size: 6pt; color: var(--c-text-muted); display: flex; flex-direction: column; gap: 1px; }
+
+    /* Comparison Table */
+    .comp-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 6.8pt; }
+    .comp-table th, .comp-table td { padding: 3.5px 5px; border-bottom: 1px dashed var(--c-border-dot); text-align: left; }
+    .comp-table th { color: var(--c-amber); background: #000000; }
+
+    /* Applications */
+    .apps-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; text-align: center; }
+    .app-card-sm { background: #000000; padding: 5px 2px; border-radius: 3px; border: 1px solid var(--c-border-dot); font-family: var(--font-mono); font-size: 6.5pt; color: var(--c-amber); }
+
+    /* Footer */
+    .footer-box { background: #000000; border: 1px solid var(--c-amber); border-radius: 4px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 3px; }
+    .footer-cta-head { font-family: var(--font-dot); font-size: 11pt; font-weight: 900; color: var(--c-text-main); }
+    .footer-contacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    .contact-card-mini { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 3px 6px; border-radius: 3px; font-family: var(--font-mono); }
+    .contact-item-lbl { color: var(--c-amber); font-size: 5.5pt; }
+    .contact-item-val { color: #FFFFFF; font-size: 7pt; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  </style>
+</head>
+<body>
+
+  <div class="poster-canvas">
+    
+    <!-- Header Bar -->
+    <header class="header-bar">
+      <div class="brand-logo">
+        <div class="logo-matrix">[RF]</div>
+        <div class="logo-text">
+          <span class="brand-title">Reaify Tech</span>
+          <span class="brand-company">睿非科技股份有限公司</span>
+        </div>
+      </div>
+      <div class="header-meta">AI TABLETOP UMPIRE SYSTEM // EFFERD_TERMINAL</div>
+    </header>
+
+    <!-- ① Hero Cover (介紹自己) -->
+    <section class="hero-banner">
+      <div>
+        <h1 class="hero-title">AI 智慧桌遊裁判系統</h1>
+        <div class="hero-tagline">&gt; 讓 AI 成為你的桌遊主持人 _</div>
+      </div>
+      <div class="keywords-pills">
+        <div class="kw-pill">[AI 主持]</div>
+        <div class="kw-pill">[手部追蹤]</div>
+        <div class="kw-pill">[NFC 辨識]</div>
+        <div class="kw-pill">[雲端管理]</div>
+      </div>
+    </section>
+
+    <!-- Main Two-Column Content Grid -->
+    <div class="main-grid">
+      
+      <!-- Left Column: ②痛點 ➔ ③核心功能 ➔ ⑤數據結果 -->
+      <div class="col">
+        
+        <!-- ② Market Pain Points (問題置前) -->
+        <div class="card-box">
+          <div>
+            <div class="box-title">[WHY_REAIFY_TECH] 面臨的營運難題</div>
+            <div class="pain-grid">
+              <div class="pain-item">
+                <div class="pain-item-title">[ERR_01] 無人帶遊戲</div>
+                <div class="pain-item-desc">客滿時人力有限，無法即時講解規則與引導進度。</div>
+              </div>
+              <div class="pain-item">
+                <div class="pain-item-title">[ERR_02] 人事成本增加</div>
+                <div class="pain-item-desc">工資上漲與全時段安排，壓迫店家營運利潤。</div>
+              </div>
+              <div class="pain-item">
+                <div class="pain-item-title">[ERR_03] 新人培訓耗時</div>
+                <div class="pain-item-desc">數百款桌遊規則複雜，新員工訓練週期長。</div>
+              </div>
+              <div class="pain-item">
+                <div class="pain-item-title">[ERR_04] 無法快速開桌</div>
+                <div class="pain-item-desc">玩家卡在說明書與等待，降低翻桌效率。</div>
+              </div>
+            </div>
+          </div>
+          <div class="banner-quote">“ Reaify Tech 讓 AI 接手重複性的工作 ”</div>
+        </div>
+
+        <!-- ③ Core Features (四大核心功能解法) -->
+        <div class="card-box">
+          <div class="box-title">[SYSTEM_MODULES] 四大核心功能</div>
+          <div class="feature-grid-sm">
+            <div class="feat-item">
+              <div class="feat-name">AI Game Master</div>
+              <div class="feat-tags">&gt; AI 教學 / 引導 / 裁判</div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-name">Vision AI (HT)</div>
+              <div class="feat-tags">&gt; 手部自動追蹤與辨識</div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-name">NFC Matrix</div>
+              <div class="feat-tags">&gt; 登入 / 道具識別 / 配對</div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-name">Dashboard</div>
+              <div class="feat-tags">&gt; 管理 / 數據 / 遠端派送</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑤ Efferd Analytics Gauge (數據成果放後面) -->
+        <div class="gauge-pdf-box">
+          <div>
+            <div class="gauge-lbl-sm">&gt; LABOR_COST_REDUCTION</div>
+            <div style="font-size: 7.5pt; color: #FFF;">人事開支自動化節減比率</div>
+          </div>
+          <div class="gauge-val-big">68%</div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: ④7步驟流程 ➔ ⑥方案與比較 ➔ ⑦場域 -->
+      <div class="col">
+        
+        <!-- ④ Solution Process (7 步驟體驗流程) -->
+        <div class="card-box">
+          <div class="box-title">[WORKFLOW] 7 步驟遊戲體驗流程</div>
+          <div class="proc-flow">
+            <div class="proc-step"><span class="proc-num">01</span><span class="proc-name">玩家入座</span><span class="proc-desc">掃碼/NFC登入</span></div>
+            <div class="proc-step"><span class="proc-num">02</span><span class="proc-name">放置桌遊</span><span class="proc-desc">配件置於辨識區</span></div>
+            <div class="proc-step"><span class="proc-num">03</span><span class="proc-name">AI辨識</span><span class="proc-desc">鏡頭毫秒識別</span></div>
+            <div class="proc-step"><span class="proc-num">04</span><span class="proc-name">AI主持</span><span class="proc-desc">語音與規則指引</span></div>
+            <div class="proc-step" style="border-color: var(--c-amber);"><span class="proc-num" style="color: var(--c-amber);">05</span><span class="proc-name" style="color: var(--c-amber);">手部追蹤/NFC</span><span class="proc-desc">自動追蹤手部動作</span></div>
+            <div class="proc-step"><span class="proc-num">06</span><span class="proc-name">自動記錄</span><span class="proc-desc">勝負與戰績累計</span></div>
+            <div class="proc-step"><span class="proc-num">07</span><span class="proc-name">營運分析</span><span class="proc-desc">店家遊玩數據圖表</span></div>
+          </div>
+        </div>
+
+        <!-- ⑥ Product Plans & Benchmarks -->
+        <div class="card-box">
+          <div class="box-title">[PRICING] 產品方案比較</div>
+          <div class="plans-grid">
+            <div class="plan-box">
+              <div class="plan-head">R1</div>
+              <div class="plan-for">小型店家 / 一般桌遊</div>
+              <div class="plan-specs">
+                <span>・AI: Cloud AI 雲端</span>
+                <span>・Vision: 標準視覺</span>
+                <span>・System: Cloud 同步</span>
+              </div>
+            </div>
+
+            <div class="plan-box" style="border-color: var(--c-amber);">
+              <div class="plan-head" style="color: var(--c-amber);">R1 Pro ★</div>
+              <div class="plan-for" style="color: var(--c-amber);">大型店家 / 高互動桌遊</div>
+              <div class="plan-specs" style="color: var(--c-amber);">
+                <span>・AI: Edge AI 邊緣晶片</span>
+                <span>・Vision: 60FPS手部追蹤</span>
+                <span>・System: Edge 極速</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑦ Application Scenarios -->
+        <div class="card-box">
+          <div class="box-title">[TARGETS] 適用多元場域</div>
+          <div class="apps-row">
+            <div class="app-card-sm">[01]桌遊店</div>
+            <div class="app-card-sm">[02]咖啡廳</div>
+            <div class="app-card-sm">[03]展覽</div>
+            <div class="app-card-sm">[04]社團</div>
+            <div class="app-card-sm">[05]教育</div>
+            <div class="app-card-sm">[06]親子</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ⑧ Footer Section -->
+    <footer class="footer-box">
+      <div class="footer-top">
+        <div class="footer-cta-head">Ready to Build Your AI Game Master?</div>
+      </div>
+
+      <div class="footer-contacts-grid">
+        <div class="contact-card-mini">
+          <span class="contact-item-lbl">[EMAIL]</span>
+          <span class="contact-item-val">contact@reaifytech.com</span>
+        </div>
+        <div class="contact-card-mini">
+          <span class="contact-item-lbl">[WEBSITE]</span>
+          <span class="contact-item-val">www.reaifytech.com</span>
+        </div>
+        <div class="contact-card-mini">
+          <span class="contact-item-lbl">[COMPANY]</span>
+          <span class="contact-item-val">睿非科技股份有限公司</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
