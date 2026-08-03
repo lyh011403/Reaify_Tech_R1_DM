@@ -1,6 +1,6 @@
-// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (Mobile RWD 版)
+// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (手機響應式優化版)
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Reaify Tech Mobile RWD Sardine Engine 5.6 Initialized.');
+  console.log('Reaify Tech Mobile-Responsive Engine 5.6 Initialized.');
 
   // ==========================================================================
   // 1. 轉灣與擺尾呼吸動態魚鱗閃光 Engine 5.6 (安詳慢速 + 轉彎/呼吸瞬間反光)
@@ -17,27 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let mouse = { x: width / 2, y: height / 2, vx: 0, vy: 0, active: false, lastX: width / 2, lastY: height / 2 };
-    window.addEventListener('mousemove', (e) => {
-      mouse.vx = e.clientX - mouse.lastX;
-      mouse.vy = e.clientY - mouse.lastY;
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      mouse.lastX = e.clientX;
-      mouse.lastY = e.clientY;
+    
+    // 支援 Touch 與 Mouse 雙重撒飼料與游標追蹤
+    function updatePointerPos(clientX, clientY) {
+      mouse.vx = clientX - mouse.lastX;
+      mouse.vy = clientY - mouse.lastY;
+      mouse.x = clientX;
+      mouse.y = clientY;
+      mouse.lastX = clientX;
+      mouse.lastY = clientY;
       mouse.active = true;
-    });
+    }
 
-    // 觸控移動適配
+    window.addEventListener('mousemove', (e) => updatePointerPos(e.clientX, e.clientY));
     window.addEventListener('touchmove', (e) => {
       if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        mouse.vx = touch.clientX - mouse.lastX;
-        mouse.vy = touch.clientY - mouse.lastY;
-        mouse.x = touch.clientX;
-        mouse.y = touch.clientY;
-        mouse.lastX = touch.clientX;
-        mouse.lastY = touch.clientY;
-        mouse.active = true;
+        updatePointerPos(e.touches[0].clientX, e.touches[0].clientY);
       }
     });
 
@@ -77,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 點擊/觸控撒飼料事件 (不影響按鈕點擊)
     window.addEventListener('pointerdown', (e) => {
-      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-switcher')) return;
+      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-btn')) return;
 
       for (let i = 0; i < 5; i++) {
         feedPellets.push(new FeedPellet(e.clientX, e.clientY));
@@ -311,16 +305,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const totalSardines = (window.innerWidth <= 768) ? 60 : 90; // 手機版自動省電降至 60 隻
+    const totalSardines = 90;
     const oceanEcosystem = [];
     for (let i = 0; i < totalSardines; i++) {
       let typeId = 0;
-      if (i >= 25 && i < 50) typeId = 1;
-      else if (i >= 50) typeId = 2;
+      if (i >= 35 && i < 70) typeId = 1;
+      else if (i >= 70) typeId = 2;
       oceanEcosystem.push(new DynamicFlashSardine(typeId));
     }
 
-    function renderEcosystemLoopRWD() {
+    function renderEcosystemLoop() {
       ctx.clearRect(0, 0, width, height);
 
       for (let i = feedPellets.length - 1; i >= 0; i--) {
@@ -340,14 +334,14 @@ document.addEventListener('DOMContentLoaded', () => {
         fish.draw(ctx);
       });
 
-      requestAnimationFrame(renderEcosystemLoopRWD);
+      requestAnimationFrame(renderEcosystemLoop);
     }
 
-    renderEcosystemLoopRWD();
+    renderEcosystemLoop();
   }
 
   // ==========================================================================
-  // 2. 4 大核心功能模組 (3D 星軌舞台 - 手機自適應動態半徑)
+  // 2. 4 大核心功能模組 (SVG Icon & 3D 星軌舞台響應式)
   // ==========================================================================
   const modulesData = [
     {
@@ -446,10 +440,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (count === 0) return;
 
     const angleStep = 360 / count;
-    // 【手機版 3D 星軌動態半徑自適應】
+
+    // 動態手機與桌面 3D 半徑視角控制
+    const isSmallMobile = window.innerWidth <= 480;
     const isMobile = window.innerWidth <= 768;
-    const radiusX = isMobile ? 145 : 340;
-    const radiusZ = isMobile ? 90 : 180;
+
+    const radiusX = isSmallMobile ? 125 : (isMobile ? 155 : 340);
+    const radiusZ = isSmallMobile ? 70 : (isMobile ? 95 : 180);
 
     cards.forEach((card, index) => {
       const cardAngle = (orbitAngle + index * angleStep) % 360;
@@ -460,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isHovered = (hoveredIndex === index);
       let posY = isHovered ? -25 : 0;
-      let scale = isHovered ? (isMobile ? 1.05 : 1.15) : (isMobile ? 0.88 : 0.95);
+      let scale = isHovered ? (isMobile ? 1.06 : 1.15) : (isMobile ? 0.88 : 0.95);
 
       if (isHovered) card.classList.add('is-hovered');
       else card.classList.remove('is-hovered');
