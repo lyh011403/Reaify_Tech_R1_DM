@@ -19,16 +19,18 @@
   <!-- 全螢幕背景 Nothing LED 馬賽克沙丁魚群 Canvas 特效 -->
   <canvas id="sardine-canvas"></canvas>
 
-  <!-- 頂部即時動態資訊列 (大白話版) -->
-  <div class="bloomberg-ticker-bar">
-    <div class="ticker-content">
-      <span class="ticker-item"><span class="t-green">● 系統狀態：正常連線</span></span>
-      <span class="ticker-item">Reaify OS v2.4</span>
-      <span class="ticker-item"><span class="t-amber">AI 回應速度：0.08 秒</span></span>
-      <span class="ticker-item"><span class="t-amber">視覺辨識：60 幀/秒</span></span>
-      <span class="ticker-item"><span class="t-red">人事成本節算：節省 68%</span></span>
-      <span class="ticker-item">手部自動追蹤：運作中</span>
-      <span class="ticker-item">睿非科技股份有限公司</span>
+  <!-- Bloomberg Style Top Ticker (100% 無縫極速測量跑馬燈) -->
+  <div class="bloomberg-ticker-bar font-mono" id="bloomberg-ticker-bar">
+    <div class="ticker-track" id="ticker-track">
+      <div class="ticker-seed" id="ticker-seed">
+        <span class="ticker-item">[系統狀態] <span class="t-green">SYSTEM OPERATIONAL</span></span>
+        <span class="ticker-item">[AI 響應] <span class="t-amber">0.08 秒極速</span></span>
+        <span class="ticker-item">[視覺辨識] <span class="t-amber">60 幀/秒 自動追蹤</span></span>
+        <span class="ticker-item">[人事成本] <span class="t-green">自動化節省 68%</span></span>
+        <span class="ticker-item">[翻桌效率] <span class="t-amber">平均提升 2.8 倍</span></span>
+        <span class="ticker-item">[核心技術] <span class="t-amber">Edge AI + NFC Sense</span></span>
+        <span class="ticker-item">[睿非科技] <span class="t-green">讓 AI 成為您的桌遊主持人 _</span></span>
+      </div>
     </div>
   </div>
 

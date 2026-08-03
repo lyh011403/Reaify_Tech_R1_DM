@@ -1,6 +1,52 @@
 // Reaify Tech - 3D 星軌 (手勢拖拽滑動+自動旋轉) + Lupi Basics + 魚鱗閃光 Sardine Engine 5.6
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Reaify Tech Interactive Orbit Dragging Engine Initialized.');
+  // ==========================================================================
+  // 100% 無縫無限跑馬燈動態測量引擎 (Seamless Ticker Measurement Engine)
+  // 1. 測量種子字串在螢幕上的精確像素寬度 seedWidth
+  // 2. 複製足夠的份數鋪滿螢幕 3 倍以上
+  // 3. 設定 Keyframe 剛好平移 -seedWidth px，實現完美 0 縫隙平滑無限滾動
+  // ==========================================================================
+  function initSeamlessTicker() {
+    const track = document.getElementById('ticker-track');
+    const seed = document.getElementById('ticker-seed');
+    if (!track || !seed) return;
+
+    const oldStyle = document.getElementById('seamless-ticker-style');
+    if (oldStyle) oldStyle.remove();
+
+    track.innerHTML = '';
+    track.appendChild(seed);
+
+    const seedWidth = seed.offsetWidth;
+    if (seedWidth <= 0) return;
+
+    const copiesNeeded = Math.max(3, Math.ceil((window.innerWidth * 3) / seedWidth));
+
+    for (let i = 1; i < copiesNeeded; i++) {
+      const clone = seed.cloneNode(true);
+      clone.removeAttribute('id');
+      track.appendChild(clone);
+    }
+
+    const speedPxPerSec = 45;
+    const duration = seedWidth / speedPxPerSec;
+
+    const styleEl = document.createElement('style');
+    styleEl.id = 'seamless-ticker-style';
+    styleEl.textContent = `
+      @keyframes dynamicSeamlessTicker {
+        0% { transform: translate3d(0px, 0, 0); }
+        100% { transform: translate3d(-${seedWidth}px, 0, 0); }
+      }
+      #ticker-track {
+        animation: dynamicSeamlessTicker ${duration}s linear infinite !important;
+      }
+    `;
+    document.head.appendChild(styleEl);
+  }
+
+  initSeamlessTicker();
+  window.addEventListener('resize', initSeamlessTicker);
 
   // ==========================================================================
   // 0. 手機版漢堡選單 (Mobile Hamburger Menu Drawer) 切換邏輯

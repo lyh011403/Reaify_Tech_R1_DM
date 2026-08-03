@@ -70,29 +70,31 @@ body.terminal-body {
   z-index: 5;
 }
 
-/* Bloomberg Style Top Ticker */
+/* Bloomberg Style Top Ticker (100% 無縫極速測量跑馬燈) */
 .bloomberg-ticker-bar {
   background: #000000;
   border-bottom: 1px dashed var(--c-border-dot);
-  padding: 6px 0;
+  padding: 8px 0;
   overflow: hidden;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   white-space: nowrap;
   position: relative;
   z-index: 10;
+  width: 100%;
 }
 
-.ticker-content {
+.ticker-track {
   display: flex;
-  gap: 24px;
-  animation: ticker-slide 24s linear infinite;
   width: max-content;
+  will-change: transform;
 }
 
-@keyframes ticker-slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.ticker-seed {
+  display: flex;
+  gap: 36px;
+  padding-right: 36px;
+  white-space: nowrap;
 }
 
 .ticker-item { color: var(--c-text-muted); }
