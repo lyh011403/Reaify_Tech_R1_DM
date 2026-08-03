@@ -40,6 +40,10 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   background-color: var(--c-black);
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
+  overscroll-behavior-x: none;
 }
 
 body.terminal-body {
@@ -48,9 +52,12 @@ body.terminal-body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: hidden !important;
+  max-width: 100vw;
   width: 100%;
+  position: relative;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
 }
 
 /* 全螢幕背景 LED 沙丁魚群 Canvas */
@@ -878,6 +885,12 @@ body.terminal-body {
    Responsive Mobile Media Queries
    ========================================================================== */
 @media (max-width: 768px) {
+  .container, .main-wrapper, .section {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+  }
+  
   .top-nav { padding: 10px 0; }
   .logo-matrix { font-size: 1.5rem; }
   .brand-name { font-size: 0.92rem; }
