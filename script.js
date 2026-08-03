@@ -1,6 +1,6 @@
-// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6
+// Reaify Tech - 3D 星軌 + Lupi Basics + 轉灣與呼吸動態魚鱗閃光 Sardine Engine 5.6 (Mobile RWD 版)
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Reaify Tech Turning & Breathing Scale Flash Sardine Engine 5.6 Initialized.');
+  console.log('Reaify Tech Mobile RWD Sardine Engine 5.6 Initialized.');
 
   // ==========================================================================
   // 1. 轉灣與擺尾呼吸動態魚鱗閃光 Engine 5.6 (安詳慢速 + 轉彎/呼吸瞬間反光)
@@ -25,6 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
       mouse.lastX = e.clientX;
       mouse.lastY = e.clientY;
       mouse.active = true;
+    });
+
+    // 觸控移動適配
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouse.vx = touch.clientX - mouse.lastX;
+        mouse.vy = touch.clientY - mouse.lastY;
+        mouse.x = touch.clientX;
+        mouse.y = touch.clientY;
+        mouse.lastX = touch.clientX;
+        mouse.lastY = touch.clientY;
+        mouse.active = true;
+      }
     });
 
     // ------------------------------------------------------------------------
@@ -63,8 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // 點擊/觸控撒飼料事件 (不影響按鈕點擊)
     window.addEventListener('pointerdown', (e) => {
-      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay')) return;
+      if (e.target.tagName === 'BUTTON' || e.target.closest('.holo-modal-overlay') || e.target.closest('.glance-switcher')) return;
 
       for (let i = 0; i < 5; i++) {
         feedPellets.push(new FeedPellet(e.clientX, e.clientY));
@@ -87,11 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
       tCtx.shadowBlur = glowBlur;
       tCtx.shadowColor = `rgba(200, 100, 0, ${alpha * 0.5})`;
 
-      // 魚頭 (暗沉琥珀金)
+      // 魚頭
       tCtx.fillStyle = `rgba(215, 125, 20, ${alpha})`;
       tCtx.fillRect(6, -1.5, 3, 3);
 
-      // 魚身暗底 (沉穩深色，絕不刺眼)
+      // 魚身暗底
       tCtx.fillStyle = `rgba(175, 80, 0, ${alpha * 0.9})`;
       tCtx.fillRect(2, -2, 4, 4);
       tCtx.fillRect(-2, -2, 4, 4);
@@ -113,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // ------------------------------------------------------------------------
-    // 轉彎與呼吸動態魚鱗閃光生態魚個體 (Dynamic Flash Engine)
+    // 轉彎與呼吸動態魚鱗閃光生態魚個體
     // ------------------------------------------------------------------------
     class DynamicFlashSardine {
       constructor(typeId) {
@@ -127,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         this.scale = 0.45 + this.tierIndex * 0.2;
         this.texture = baseTextures[this.tierIndex];
         
-        // 【恢復優雅安詳慢速】：0.75 ~ 1.2px/frame
         this.baseMaxSpeed = 0.75 + this.depth * 0.45;
         this.maxSpeed = this.baseMaxSpeed;
 
@@ -139,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.ax = 0;
         this.ay = 0;
         this.phase = Math.random() * Math.PI * 2;
-        this.turnIntensity = 0; // 轉向強度
+        this.turnIntensity = 0;
       }
 
       update() {
@@ -155,11 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x += this.vx;
         this.y += this.vy;
 
-        // 計算轉向強度 (Turn Acceleration Strength)
         const accelMag = Math.hypot(this.ax, this.ay);
         this.turnIntensity += (accelMag * 15 - this.turnIntensity) * 0.15;
 
-        // 平滑角度插值
         if (speed > 0.05) {
           const targetHeading = Math.atan2(this.vy, this.vx);
           let diff = targetHeading - this.currentHeading;
@@ -175,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.ax = 0;
         this.ay = 0;
-        this.phase += 0.09; // 安詳慢速擺尾
+        this.phase += 0.09;
       }
 
       applyForce(fx, fy) {
@@ -280,23 +292,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const tHeight = this.texture.height;
         ctx.drawImage(this.texture, -tWidth / 2, -tHeight / 2 + tailOffset * 0.2);
 
-        // --------------------------------------------------------------------
-        // 【動態魚鱗反光 & 呼吸一閃一閃 / 轉灣亮感】(Breathing & Turning Reflex)
-        // --------------------------------------------------------------------
-        // 1. 隨呼吸脈動 (Phase Sine: 0~1)
         const breathPulse = Math.max(0, Math.sin(this.phase));
-        
-        // 2. 轉向亮感 (Turn Intensity)
         const turnFlash = Math.min(1.0, this.turnIntensity);
-
-        // 綜合反光閃亮強度 (0.0 ~ 1.0)
         const flashAlpha = Math.min(1.0, (breathPulse * 0.65) + (turnFlash * 0.85));
 
         if (flashAlpha > 0.1) {
           ctx.shadowBlur = Math.round(8 * this.depth);
           ctx.shadowColor = `rgba(255, 255, 255, ${flashAlpha * 0.9})`;
 
-          // 魚鱗白黃高光鏡面閃點
           ctx.fillStyle = `rgba(255, 250, 220, ${flashAlpha * 0.95})`;
           ctx.fillRect(1.5 * this.scale, -1.2 * this.scale, 2.5 * this.scale, 1.8 * this.scale);
 
@@ -308,16 +311,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const totalSardines = 90;
+    const totalSardines = (window.innerWidth <= 768) ? 60 : 90; // 手機版自動省電降至 60 隻
     const oceanEcosystem = [];
     for (let i = 0; i < totalSardines; i++) {
       let typeId = 0;
-      if (i >= 35 && i < 70) typeId = 1;
-      else if (i >= 70) typeId = 2;
+      if (i >= 25 && i < 50) typeId = 1;
+      else if (i >= 50) typeId = 2;
       oceanEcosystem.push(new DynamicFlashSardine(typeId));
     }
 
-    function renderEcosystemLoop56() {
+    function renderEcosystemLoopRWD() {
       ctx.clearRect(0, 0, width, height);
 
       for (let i = feedPellets.length - 1; i >= 0; i--) {
@@ -337,14 +340,14 @@ document.addEventListener('DOMContentLoaded', () => {
         fish.draw(ctx);
       });
 
-      requestAnimationFrame(renderEcosystemLoop56);
+      requestAnimationFrame(renderEcosystemLoopRWD);
     }
 
-    renderEcosystemLoop56();
+    renderEcosystemLoopRWD();
   }
 
   // ==========================================================================
-  // 2. 4 大核心功能模組 (SVG Icon & 3D 星軌舞台)
+  // 2. 4 大核心功能模組 (3D 星軌舞台 - 手機自適應動態半徑)
   // ==========================================================================
   const modulesData = [
     {
@@ -443,8 +446,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (count === 0) return;
 
     const angleStep = 360 / count;
-    const radiusX = 340;
-    const radiusZ = 180;
+    // 【手機版 3D 星軌動態半徑自適應】
+    const isMobile = window.innerWidth <= 768;
+    const radiusX = isMobile ? 145 : 340;
+    const radiusZ = isMobile ? 90 : 180;
 
     cards.forEach((card, index) => {
       const cardAngle = (orbitAngle + index * angleStep) % 360;
@@ -454,8 +459,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const posZ = Math.sin(rad) * radiusZ;
 
       const isHovered = (hoveredIndex === index);
-      let posY = isHovered ? -35 : 0;
-      let scale = isHovered ? 1.15 : 0.95;
+      let posY = isHovered ? -25 : 0;
+      let scale = isHovered ? (isMobile ? 1.05 : 1.15) : (isMobile ? 0.88 : 0.95);
 
       if (isHovered) card.classList.add('is-hovered');
       else card.classList.remove('is-hovered');
