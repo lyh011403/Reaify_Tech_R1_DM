@@ -1,6 +1,6 @@
 # Reaify Tech 睿非科技 - AI Game Master 智慧桌遊主控旗艦系統
 
-![Reaify Tech Hero Product](hero_product.jpg)
+![Reaify Tech Hero Product]
 
 ## 📌 專案簡介
 本專案為 **睿非科技股份有限公司 (Reaify Tech Co., Ltd.)** 旗艦產品 **AI Game Master** 之官方宣傳單頁網頁與單頁 PDF DM 系統。結合 Nothing 點陣 LED 美學、3D 旋轉模組舞台與 60FPS 零耗能沙丁魚群動態海洋背景。
