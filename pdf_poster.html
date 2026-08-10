@@ -98,60 +98,61 @@
       margin-bottom: 10px;
     }
 
-    .col { display: flex; flex-direction: column; gap: 10px; justify-content: space-between; }
-    .card-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); border-radius: 4px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-    .box-title { font-family: var(--font-dot); font-size: 11pt; font-weight: 700; color: var(--c-amber); margin-bottom: 6px; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 3px; }
+    .col { display: flex; flex-direction: column; gap: 10px; justify-content: flex-start; }
+    .card-box { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); border-radius: 4px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; }
+    .card-box-grow { flex-grow: 1; }
+    .box-title { font-family: var(--font-dot); font-size: 12pt; font-weight: 700; color: var(--c-amber); margin-bottom: 4px; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 4px; letter-spacing: 0.04em; }
 
     /* Pain Points */
-    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 6px; }
-    .pain-item { background: #000000; border: 1px solid var(--c-border-dot); padding: 5px 7px; border-radius: 3px; }
-    .pain-item-title { font-family: var(--font-mono); font-weight: 700; font-size: 7.5pt; color: var(--c-amber); margin-bottom: 1px; }
-    .pain-item-desc { font-size: 6.5pt; color: var(--c-text-muted); line-height: 1.25; }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 4px; }
+    .pain-item { background: #000000; border: 1px solid var(--c-border-dot); padding: 7px 9px; border-radius: 3px; }
+    .pain-item-title { font-family: var(--font-mono); font-weight: 700; font-size: 8pt; color: var(--c-amber); margin-bottom: 2px; }
+    .pain-item-desc { font-size: 7pt; color: var(--c-text-muted); line-height: 1.3; }
 
-    .banner-quote { background: #000000; border: 1px solid var(--c-amber); color: var(--c-text-main); padding: 6px 8px; border-radius: 3px; font-family: var(--font-dot); font-size: 9pt; font-weight: 700; text-align: center; }
+    .banner-quote { background: #000000; border: 1px solid var(--c-amber); color: var(--c-text-main); padding: 8px 10px; border-radius: 3px; font-family: var(--font-dot); font-size: 10pt; font-weight: 700; text-align: center; margin-top: 4px; }
 
     /* Features Section */
-    .feature-grid-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-    .feat-item { background: #000000; padding: 6px 8px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
-    .feat-name { font-family: var(--font-mono); font-weight: 700; font-size: 7.8pt; color: var(--c-text-main); margin-bottom: 1px; }
-    .feat-tags { font-family: var(--font-mono); font-size: 6.2pt; color: var(--c-text-muted); line-height: 1.3; }
+    .feature-grid-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .feat-item { background: #000000; padding: 8px 10px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
+    .feat-name { font-family: var(--font-mono); font-weight: 700; font-size: 8.5pt; color: var(--c-text-main); margin-bottom: 2px; }
+    .feat-tags { font-family: var(--font-mono); font-size: 6.8pt; color: var(--c-text-muted); line-height: 1.35; }
 
     /* Efferd Gauges in PDF */
-    .gauge-pdf-box { display: flex; items-center: center; justify-content: space-between; background: #000000; padding: 6px 10px; border: 1px solid var(--c-border-dot); }
-    .gauge-val-big { font-family: var(--font-dot); font-size: 20pt; font-weight: 900; color: var(--c-amber); }
-    .gauge-lbl-sm { font-family: var(--font-mono); font-size: 7pt; color: var(--c-text-muted); }
+    .gauge-pdf-box { display: flex; align-items: center; justify-content: space-between; background: #000000; padding: 8px 12px; border: 1px solid var(--c-border-dot); border-radius: 4px; }
+    .gauge-val-big { font-family: var(--font-dot); font-size: 22pt; font-weight: 900; color: var(--c-amber); }
+    .gauge-lbl-sm { font-family: var(--font-mono); font-size: 7.5pt; color: var(--c-text-muted); }
 
     /* Solution Process */
-    .proc-flow { display: flex; flex-direction: column; gap: 4px; }
-    .proc-step { display: flex; align-items: center; gap: 6px; background: #000000; padding: 4px 7px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
-    .proc-num { font-family: var(--font-dot); font-weight: 700; font-size: 8pt; color: var(--c-amber); width: 20px; }
-    .proc-name { font-family: var(--font-dot); font-weight: 700; font-size: 8pt; width: 80px; color: var(--c-text-main); }
-    .proc-desc { font-family: var(--font-mono); font-size: 6.5pt; color: var(--c-text-muted); }
+    .proc-flow { display: flex; flex-direction: column; gap: 5px; }
+    .proc-step { display: flex; align-items: center; gap: 8px; background: #000000; padding: 5px 8px; border-radius: 3px; border: 1px solid var(--c-border-dot); }
+    .proc-num { font-family: var(--font-dot); font-weight: 700; font-size: 8.5pt; color: var(--c-amber); width: 22px; }
+    .proc-name { font-family: var(--font-dot); font-weight: 700; font-size: 8.5pt; width: 85px; color: var(--c-text-main); }
+    .proc-desc { font-family: var(--font-mono); font-size: 6.8pt; color: var(--c-text-muted); }
 
     /* Product Plans */
-    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-    .plan-box { border: 1px solid var(--c-border-dot); border-radius: 3px; padding: 6px 8px; background: #000000; }
-    .plan-head { font-family: var(--font-dot); font-size: 10.5pt; font-weight: 900; color: var(--c-text-main); }
-    .plan-for { font-family: var(--font-mono); font-size: 6.4pt; color: var(--c-text-muted); margin-bottom: 3px; }
-    .plan-specs { font-family: var(--font-mono); font-size: 6pt; color: var(--c-text-muted); display: flex; flex-direction: column; gap: 1px; }
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .plan-box { border: 1px solid var(--c-border-dot); border-radius: 3px; padding: 8px 10px; background: #000000; }
+    .plan-head { font-family: var(--font-dot); font-size: 11pt; font-weight: 900; color: var(--c-text-main); }
+    .plan-for { font-family: var(--font-mono); font-size: 6.8pt; color: var(--c-text-muted); margin-bottom: 4px; }
+    .plan-specs { font-family: var(--font-mono); font-size: 6.5pt; color: var(--c-text-muted); display: flex; flex-direction: column; gap: 2px; }
 
     /* Comparison Table */
-    .comp-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 6.8pt; }
-    .comp-table th, .comp-table td { padding: 3.5px 5px; border-bottom: 1px dashed var(--c-border-dot); text-align: left; }
+    .comp-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 7.2pt; }
+    .comp-table th, .comp-table td { padding: 4px 6px; border-bottom: 1px dashed var(--c-border-dot); text-align: left; }
     .comp-table th { color: var(--c-amber); background: #000000; }
 
     /* Applications */
-    .apps-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; text-align: center; }
-    .app-card-sm { background: #000000; padding: 5px 2px; border-radius: 3px; border: 1px solid var(--c-border-dot); font-family: var(--font-mono); font-size: 6.5pt; color: var(--c-amber); }
+    .apps-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; text-align: center; }
+    .app-card-sm { background: #000000; padding: 6px 3px; border-radius: 3px; border: 1px solid var(--c-border-dot); font-family: var(--font-mono); font-size: 6.8pt; color: var(--c-amber); }
 
     /* Footer */
-    .footer-box { background: #000000; border: 1px solid var(--c-amber); border-radius: 4px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
-    .footer-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 3px; }
-    .footer-cta-head { font-family: var(--font-dot); font-size: 11pt; font-weight: 900; color: var(--c-text-main); }
-    .footer-contacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
-    .contact-card-mini { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 3px 6px; border-radius: 3px; font-family: var(--font-mono); }
-    .contact-item-lbl { color: var(--c-amber); font-size: 5.5pt; }
-    .contact-item-val { color: #FFFFFF; font-size: 7pt; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .footer-box { background: #000000; border: 1px solid var(--c-amber); border-radius: 4px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--c-border-dot); padding-bottom: 4px; }
+    .footer-cta-head { font-family: var(--font-dot); font-size: 12pt; font-weight: 900; color: var(--c-text-main); letter-spacing: 0.04em; }
+    .footer-contacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .contact-card-mini { background: var(--c-card-bg); border: 1px solid var(--c-border-dot); padding: 4px 8px; border-radius: 3px; font-family: var(--font-mono); }
+    .contact-item-lbl { color: var(--c-amber); font-size: 6pt; }
+    .contact-item-val { color: #FFFFFF; font-size: 7.5pt; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   </style>
 </head>
 <body>
@@ -217,24 +218,28 @@
         </div>
 
         <!-- ③ Core Features (四大核心功能解法) -->
-        <div class="card-box">
+        <div class="card-box card-box-grow">
           <div class="box-title">[SYSTEM_MODULES] 四大核心功能</div>
           <div class="feature-grid-sm">
             <div class="feat-item">
               <div class="feat-name">AI Game Master</div>
-              <div class="feat-tags">&gt; AI 教學 / 引導 / 裁判</div>
+              <div class="feat-tags">&gt; AI 規則教學 / 指引 / 裁判</div>
+              <div style="font-size: 6.4pt; color: var(--c-text-muted); margin-top: 2px;">全語音即時解答，解鎖複雜開桌流程</div>
             </div>
             <div class="feat-item">
               <div class="feat-name">Vision AI (HT)</div>
               <div class="feat-tags">&gt; 手部自動追蹤與辨識</div>
+              <div style="font-size: 6.4pt; color: var(--c-text-muted); margin-top: 2px;">60FPS 邊緣辨識，自動判別玩家動作</div>
             </div>
             <div class="feat-item">
               <div class="feat-name">NFC Matrix</div>
               <div class="feat-tags">&gt; 登入 / 道具識別 / 配對</div>
+              <div style="font-size: 6.4pt; color: var(--c-text-muted); margin-top: 2px;">秒級感應卡牌道具，智慧計分統計</div>
             </div>
             <div class="feat-item">
               <div class="feat-name">Dashboard</div>
               <div class="feat-tags">&gt; 管理 / 數據 / 遠端派送</div>
+              <div style="font-size: 6.4pt; color: var(--c-text-muted); margin-top: 2px;">一鍵派送桌遊庫，營運實時可視化</div>
             </div>
           </div>
         </div>
@@ -268,26 +273,28 @@
         </div>
 
         <!-- ⑥ Product Plans & Benchmarks -->
-        <div class="card-box">
-          <div class="box-title">[PRICING] 產品方案比較</div>
+        <div class="card-box card-box-grow">
+          <div class="box-title">[SOLUTIONS] 彈性引進與痛點規劃</div>
           <div class="plans-grid">
             <div class="plan-box">
-              <div class="plan-head">R1</div>
-              <div class="plan-for">小型店家 / 一般桌遊</div>
+              <div class="plan-head">R1 標準版</div>
+              <div class="plan-for">適合：小型店家 / 一般桌遊</div>
               <div class="plan-specs">
-                <span>・AI: Cloud AI 雲端</span>
-                <span>・Vision: 標準視覺</span>
-                <span>・System: Cloud 同步</span>
+                <span>・AI: Cloud AI 雲端推論</span>
+                <span>・Vision: 標準視覺辨識</span>
+                <span>・System: 雲端同步與數據看板</span>
+                <span style="color: var(--c-amber); margin-top: 3px; font-weight: 700;">&gt; 提供免費店家痛點評估</span>
               </div>
             </div>
 
             <div class="plan-box" style="border-color: var(--c-amber);">
-              <div class="plan-head" style="color: var(--c-amber);">R1 Pro ★</div>
-              <div class="plan-for" style="color: var(--c-amber);">大型店家 / 高互動桌遊</div>
+              <div class="plan-head" style="color: var(--c-amber);">R1 Pro 旗艦版 ★</div>
+              <div class="plan-for" style="color: var(--c-amber);">適合：大型店家 / 高互動桌遊</div>
               <div class="plan-specs" style="color: var(--c-amber);">
                 <span>・AI: Edge AI 邊緣晶片</span>
-                <span>・Vision: 60FPS手部追蹤</span>
-                <span>・System: Edge 極速</span>
+                <span>・Vision: 60FPS 手部追蹤</span>
+                <span>・System: Edge 邊緣極速響應</span>
+                <span style="color: var(--c-amber); margin-top: 3px; font-weight: 700;">&gt; 專案客製痛點規劃諮詢</span>
               </div>
             </div>
           </div>
