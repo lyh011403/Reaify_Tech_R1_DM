@@ -366,86 +366,65 @@
 
     <!-- ⑥ 店家痛點適配方案建議 -->
     <section id="products" class="section product-section">
-      <div class="container">
-        
-        <div class="section-header text-center">
-          <div class="ascii-tag">[PRICING_PLANS]</div>
-          <h2 class="section-title font-dot">產品方案與效能比較</h2>
-          <p class="section-desc font-mono">彈性方案選擇與規格比較</p>
-        </div>
-
-        <div class="products-terminal-grid">
-          <div class="nothing-card plan-term-card glyph-led-interactive tilt-card">
-            <div class="led-top-strip"></div>
-            <div class="plan-tag font-mono">[方案 01] 標準版</div>
-            <h3 class="plan-code-name font-dot">R1</h3>
-            <p class="plan-code-fit font-mono">適合：小型店家 / 一般桌遊</p>
-
-            <div class="plan-specs-list font-mono">
-              <div class="p-row"><span>AI:</span> <span>Cloud AI 雲端推論</span></div>
-              <div class="p-row"><span>Vision:</span> <span>標準視覺辨識</span></div>
-              <div class="p-row"><span>NFC:</span> <span>單點感應模組</span></div>
-              <div class="p-row"><span>System:</span> <span>Cloud 雲端同步</span></div>
-            </div>
-
-            
-          </div>
-
-          <div class="nothing-card plan-term-card glyph-led-interactive tilt-card">
-            <div class="led-top-strip"></div>
-            <div class="plan-tag font-mono t-amber">[方案 02] 旗艦版 ★</div>
-            <h3 class="plan-code-name font-dot t-amber">R1 Pro</h3>
-            <p class="plan-code-fit font-mono">適合：大型店家 / 高互動桌遊</p>
-
-            <div class="plan-specs-list font-mono">
-              <div class="p-row"><span>AI:</span> <span>Edge AI 邊緣晶片</span></div>
-              <div class="p-row"><span>Vision:</span> <span>手部追蹤與 60FPS</span></div>
-              <div class="p-row"><span>NFC:</span> <span>多重道具感應</span></div>
-              <div class="p-row"><span>System:</span> <span>Edge 邊緣極速</span></div>
-            </div>
-
-            
-          </div>
-        </div>
-
-        <!-- 效能表格 -->
-        <div class="nothing-card table-nothing-card glyph-led-interactive tilt-card" style="margin-top: 24px;">
-          <div class="led-top-strip"></div>
-          <table class="bloomberg-table font-mono">
-            <thead>
-              <tr>
-                <th>[比較項目]</th>
-                <th>[R1 標準版]</th>
-                <th>[R1 PRO 旗艦版]</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="m-head">AI 反應速度</td>
-                <td>較慢 (0.8 ~ 1.5 秒)</td>
-                <td class="t-amber">極速 (0.1 ~ 0.3 秒)</td>
-              </tr>
-              <tr>
-                <td class="m-head">網路依賴度</td>
-                <td>雲端依賴網路</td>
-                <td class="t-amber">本地端完全離線可用</td>
-              </tr>
-              <tr>
-                <td class="m-head">手部追蹤辨識</td>
-                <td>標準手部動作追蹤</td>
-                <td class="t-amber">即時毫秒動作追蹤</td>
-              </tr>
-              <tr>
-                <td class="m-head">運算架構</td>
-                <td>Cloud 雲端推論</td>
-                <td class="t-amber">Edge 邊緣晶片硬體加速</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag font-mono">[SOLUTION_PROPOSALS]</span>
+        <h2 class="section-title">店家痛點適配方案建議</h2>
+        <p class="section-desc">針對店家營運痛點提出之客製化方案與完整硬體規格對比</p>
       </div>
-    </section>
+
+      <!-- 唯一一站式整合比較矩陣 (完全移除上方重複舊卡片) -->
+      <div class="plans-matrix-wrapper" style="background: var(--c-card-bg); border: 1px solid var(--c-amber); border-radius: 6px; padding: 24px; margin-top: 24px;">
+        <table class="bloomberg-table font-mono" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--c-amber);">
+              <th style="padding: 14px; text-align: left; font-size: 1.05rem; color: var(--c-amber);">[比較項目 / 規格]</th>
+              <th style="padding: 14px; text-align: left; font-size: 1.15rem; color: #FFFFFF; width: 38%;">
+                [方案 01] R1 標準版
+                <div style="font-size: 0.8rem; color: var(--c-text-muted); font-weight: normal; margin-top: 4px;">適合：小型店家 / 一般桌遊開桌</div>
+              </th>
+              <th style="padding: 14px; text-align: left; font-size: 1.15rem; color: var(--c-amber); width: 38%;">
+                [方案 02] R1 PRO 旗艦版 ★
+                <div style="font-size: 0.8rem; color: var(--c-amber); font-weight: normal; margin-top: 4px;">適合：大型店家 / 高互動沉浸桌遊</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px dashed var(--c-border-dot);">
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">AI 反應速度</td>
+              <td style="padding: 12px; color: #CCCCCC;">較慢 (0.8 ~ 1.5 秒)</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-green); font-weight: bold;">極速 (0.1 ~ 0.3 秒)</td>
+            </tr>
+            <tr style="border-bottom: 1px dashed var(--c-border-dot);">
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">網路依賴度</td>
+              <td style="padding: 12px; color: #CCCCCC;">雲端依賴網路</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-green); font-weight: bold;">本地端完全離線可用</td>
+            </tr>
+            <tr style="border-bottom: 1px dashed var(--c-border-dot);">
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">手部追蹤辨識</td>
+              <td style="padding: 12px; color: #CCCCCC;">標準手部動作追蹤</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-amber); font-weight: bold;">即時毫秒動作追蹤</td>
+            </tr>
+            <tr style="border-bottom: 1px dashed var(--c-border-dot);">
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">運算架構</td>
+              <td style="padding: 12px; color: #CCCCCC;">Cloud 雲端推論</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-amber); font-weight: bold;">Edge 邊緣晶片硬體加速</td>
+            </tr>
+            <tr style="border-bottom: 1px dashed var(--c-border-dot);">
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">NFC 道具識別</td>
+              <td style="padding: 12px; color: #CCCCCC;">單點感應模組</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-amber); font-weight: bold;">多重道具即時感應</td>
+            </tr>
+            <tr>
+              <td class="m-head" style="padding: 12px; font-weight: bold; color: var(--c-amber);">系統營運看板</td>
+              <td style="padding: 12px; color: #CCCCCC;">雲端同步與數據看板</td>
+              <td class="t-amber" style="padding: 12px; color: var(--c-amber); font-weight: bold;">Edge 邊緣極速響應看板</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
     <!-- ⑦ 適用場域 -->
     <section id="applications" class="section app-section">
