@@ -967,3 +967,8 @@ body.terminal-body {
   .feat-code-head { font-size: 0.76rem; }
   .feat-code-sub { font-size: 0.64rem; }
 }
+
+/* 隱藏方案費用，聚焦店家痛點評估諮詢 */
+.plan-foot-price {
+  display: none !important;
+}
