@@ -247,16 +247,16 @@ body.terminal-body {
 }
 
 /* Sections Base */
-.section { padding: 56px 0; border-bottom: 1px dashed var(--c-border-dot); }
-.section-header { margin-bottom: 36px; }
+.section { padding: 64px 0; border-bottom: 1px dashed var(--c-border-dot); }
+.section-header { margin-bottom: 40px; }
 .text-center { text-align: center; }
 
-.ascii-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--c-amber); margin-bottom: 6px; letter-spacing: 0.1em; }
-.section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: #FFFFFF; letter-spacing: 0.02em; margin-bottom: 6px; }
-.section-desc { font-size: 0.9rem; color: var(--c-text-muted); }
+.ascii-tag { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-amber); margin-bottom: 8px; letter-spacing: 0.12em; text-transform: uppercase; }
+.section-title { font-size: clamp(1.9rem, 4.2vw, 2.6rem); font-weight: 700; color: #FFFFFF !important; letter-spacing: 0.04em; margin-bottom: 8px; }
+.section-desc { font-size: 0.92rem; color: var(--c-text-muted); letter-spacing: 0.05em; }
 
-.font-dot { font-family: var(--font-dot); letter-spacing: 0.05em; }
-.font-mono { font-family: var(--font-mono); }
+.font-dot { font-family: var(--font-dot); letter-spacing: 0.06em; }
+.font-mono { font-family: var(--font-mono); letter-spacing: 0.03em; }
 .font-sans { font-family: var(--font-sans); }
 
 /* Nothing Card Base & 3D Tilt */
