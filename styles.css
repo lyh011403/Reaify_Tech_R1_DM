@@ -972,3 +972,50 @@ body.terminal-body {
 .plan-foot-price {
   display: none !important;
 }
+
+
+/* ===== Mobile RWD Table Optimization ===== */
+.plans-matrix-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--c-card-bg);
+  border: 1px solid var(--c-amber);
+  border-radius: 6px;
+  padding: 20px;
+  margin-top: 24px;
+  position: relative;
+}
+
+.mobile-scroll-hint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .plans-matrix-wrapper {
+    padding: 14px 10px !important;
+    margin-top: 16px !important;
+  }
+  
+  .mobile-scroll-hint {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--c-amber);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+  
+  .plans-matrix-wrapper table {
+    min-width: 520px;
+  }
+  
+  .plans-matrix-wrapper th,
+  .plans-matrix-wrapper td {
+    padding: 9px 8px !important;
+    font-size: 0.76rem !important;
+  }
+  
+  .plans-matrix-wrapper th div {
+    font-size: 0.7rem !important;
+  }
+}
