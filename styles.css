@@ -1019,3 +1019,115 @@ body.terminal-body {
     font-size: 0.7rem !important;
   }
 }
+
+
+/* ===== Mobile 2-Card Swiper Styling ===== */
+.mobile-plans-swiper {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only-table,
+  .plans-matrix-wrapper {
+    display: none !important;
+  }
+
+  .mobile-plans-swiper {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .mobile-swiper-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--c-amber);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .mobile-cards-track {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 4px 16px 4px;
+  }
+
+  .mobile-plan-card {
+    flex: 0 0 86%;
+    scroll-snap-align: center;
+    background: var(--c-card-bg);
+    border: 1px solid var(--c-border-dot);
+    border-radius: 8px;
+    padding: 18px 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .mobile-plan-card.highlight-card {
+    border-color: var(--c-amber);
+    background: linear-gradient(180deg, #18140e 0%, var(--c-card-bg) 100%);
+  }
+
+  .mp-card-header {
+    border-bottom: 1px dashed var(--c-border-dot);
+    padding-bottom: 10px;
+  }
+
+  .mp-tag {
+    font-size: 0.75rem;
+    color: var(--c-amber);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .mp-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+  }
+
+  .mp-sub {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+  }
+
+  .mp-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    padding-bottom: 6px;
+  }
+
+  .mp-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .mp-label {
+    color: var(--c-amber);
+    font-weight: 600;
+  }
+
+  .mp-val {
+    color: #DDDDDD;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .t-amber { color: var(--c-amber) !important; }
+  .t-green { color: var(--c-green) !important; font-weight: bold; }
+}
